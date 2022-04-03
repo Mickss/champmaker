@@ -37,6 +37,11 @@
 			<artifactId>firebase-admin</artifactId>
 			<version>8.1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>2.2.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
