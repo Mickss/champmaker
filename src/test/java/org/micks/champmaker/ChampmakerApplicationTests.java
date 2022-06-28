@@ -9,5 +9,4 @@ class ChampmakerApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
