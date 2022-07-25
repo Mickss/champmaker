@@ -10,23 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "championship")
+@Table(name = "team")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class ChampionshipEntity {
+public class TeamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nameChamp;
-    private String city;
-    private String date;
+    private String nameTeam;
 
-    public ChampionshipEntity(String nameChamp, String city, String date) {
-        this.nameChamp = nameChamp;
-        this.city = city;
-        this.date = date;
+    public TeamEntity(String nameTeam) {
+        this.nameTeam = nameTeam;
     }
 }

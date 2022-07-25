@@ -17,12 +17,12 @@ public class ChampionshipService {
     public List<ChampionshipDTO> getChampionships() {
         List<ChampionshipEntity> championshipList = championshipRepository.findAll();
         return championshipList.stream()
-                .map(championshipEntity -> new ChampionshipDTO(championshipEntity.getNameChamp()))
+                .map(championshipEntity -> new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate()))
                 .collect(Collectors.toList());
     }
 
-    public void createNewChampionship(ChampionshipDTO championshipDTO) {
-        ChampionshipEntity championshipEntity = new ChampionshipEntity(championshipDTO.getName());
+    public void createChampionship(ChampionshipDTO championshipDTO) {
+        ChampionshipEntity championshipEntity = new ChampionshipEntity(championshipDTO.getName(), championshipDTO.getCity(), championshipDTO.getDate());
         championshipRepository.save(championshipEntity);
     }
 }
