@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class TeamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String nameTeam;
 

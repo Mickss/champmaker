@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class ChampionshipEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String nameChamp;
     private String city;

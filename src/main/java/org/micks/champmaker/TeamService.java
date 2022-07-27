@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -12,7 +13,17 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public List<TeamDTO> getNameTeam() {
+    public TeamDTO getTeam(long teamId) {
+        Optional<TeamEntity> optionalTeam = teamRepository.findById(teamId);
+        if (optionalTeam.isPresent()) {
+            TeamEntity teamEntity = optionalTeam.get();
+            return new TeamDTO(teamEntity.getNameTeam());
+        } else {
+            throw new RuntimeException("Can not find team with Id: " + teamId);
+        }
+    }
+
+    public List<TeamDTO> getTeams() {
         List<TeamEntity> teamList = teamRepository.findAll();
         return teamList.stream()
                 .map(teamEntity -> new TeamDTO(teamEntity.getNameTeam()))
