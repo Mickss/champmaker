@@ -1,5 +1,6 @@
-package org.micks.champmaker;
+package org.micks.champmaker.teams;
 
+import org.micks.champmaker.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,25 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/players")
+@RequestMapping("/teams")
 @CrossOrigin
-public class PlayerController {
+public class TeamController {
 
     @Autowired
-    private PlayerService playerService;
+    private TeamService teamService;
 
-    @GetMapping("/{playerId}")
-    public PlayerDTO getPlayer(@PathVariable long playerId) throws EntityNotFoundException {
-        return playerService.getPlayer(playerId);
+    @GetMapping("/{teamId}")
+    public TeamDTO getTeam(@PathVariable long teamId) throws EntityNotFoundException {
+        return teamService.getTeam(teamId);
     }
 
     @GetMapping
-    public List<PlayerDTO> getPlayers() {
-        return playerService.getPlayers();
+    public List<TeamDTO> getTeams() {
+        return teamService.getTeams();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createPlayer(@RequestBody PlayerDTO playerDTO) {
-        playerService.createPlayer(playerDTO);
+    public void createTeams(@RequestBody TeamDTO teamDto) {
+        teamService.createTeam(teamDto);
     }
 }

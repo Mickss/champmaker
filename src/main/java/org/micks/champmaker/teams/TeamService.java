@@ -1,5 +1,6 @@
-package org.micks.champmaker;
+package org.micks.champmaker.teams;
 
+import org.micks.champmaker.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

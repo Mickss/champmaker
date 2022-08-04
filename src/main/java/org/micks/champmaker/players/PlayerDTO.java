@@ -1,4 +1,4 @@
-package org.micks.champmaker;
+package org.micks.champmaker.players;
 
 public class PlayerDTO {
 

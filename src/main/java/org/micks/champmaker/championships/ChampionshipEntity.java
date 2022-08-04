@@ -1,4 +1,4 @@
-package org.micks.champmaker;
+package org.micks.champmaker.championships;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,24 +10,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "player")
+@Table(name = "championship")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class PlayerEntity {
+public class ChampionshipEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String playerName;
-    private Long playerNumber;
-    private String playerTeam;
+    private String nameChamp;
+    private String city;
+    private String date;
 
-
-    public PlayerEntity(String playerName, Long playerNumber, String playerTeam) {
-        this.playerName = playerName;
-        this.playerNumber = playerNumber;
-        this.playerTeam = playerTeam;
+    public ChampionshipEntity(String nameChamp, String city, String date) {
+        this.nameChamp = nameChamp;
+        this.city = city;
+        this.date = date;
     }
 }

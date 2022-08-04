@@ -1,5 +1,6 @@
-package org.micks.champmaker;
+package org.micks.champmaker.championships;
 
+import org.micks.champmaker.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
