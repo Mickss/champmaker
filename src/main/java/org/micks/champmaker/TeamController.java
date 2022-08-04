@@ -21,7 +21,7 @@ public class TeamController {
     private TeamService teamService;
 
     @GetMapping("/{teamId}")
-    public TeamDTO getTeam(@PathVariable long teamId) {
+    public TeamDTO getTeam(@PathVariable long teamId) throws EntityNotFoundException {
         return teamService.getTeam(teamId);
     }
 
