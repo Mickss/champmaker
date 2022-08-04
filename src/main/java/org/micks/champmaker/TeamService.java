@@ -13,13 +13,13 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public TeamDTO getTeam(long teamId) {
+    public TeamDTO getTeam(long teamId) throws EntityNotFoundException {
         Optional<TeamEntity> optionalTeam = teamRepository.findById(teamId);
         if (optionalTeam.isPresent()) {
             TeamEntity teamEntity = optionalTeam.get();
             return new TeamDTO(teamEntity.getNameTeam());
         } else {
-            throw new RuntimeException("Can not find team with Id: " + teamId);
+            throw new EntityNotFoundException("Cannot find team with Id: " + teamId);
         }
     }
 
