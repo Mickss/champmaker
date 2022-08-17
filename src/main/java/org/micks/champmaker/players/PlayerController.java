@@ -32,7 +32,7 @@ public class PlayerController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createPlayer(@RequestBody PlayerDTO playerDTO) {
+    public void createPlayer(@RequestBody PlayerDTO playerDTO) throws EntityNotFoundException {
         playerService.createPlayer(playerDTO);
     }
 }
