@@ -4,15 +4,15 @@ public class PlayerDTO {
 
     private String playerName;
     private Long playerNumber;
-    private String playerTeam;
+    private Long teamId;
 
     public PlayerDTO() {
     }
 
-    public PlayerDTO(String playerName, Long playerNumber, String playerTeam) {
+    public PlayerDTO(String playerName, Long playerNumber, Long teamId) {
         this.playerName = playerName;
         this.playerNumber = playerNumber;
-        this.playerTeam = playerTeam;
+        this.teamId = teamId;
     }
 
     public String getPlayerName() {
@@ -23,7 +23,7 @@ public class PlayerDTO {
         return playerNumber;
     }
 
-    public String getPlayerTeam() {
-        return playerTeam;
+    public Long getTeamId() {
+        return teamId;
     }
 }

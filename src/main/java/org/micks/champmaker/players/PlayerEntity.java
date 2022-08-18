@@ -3,11 +3,14 @@ package org.micks.champmaker.players;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.micks.champmaker.teams.TeamEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "player")
@@ -22,12 +25,14 @@ public class PlayerEntity {
 
     private String playerName;
     private Long playerNumber;
-    private String playerTeam;
 
+    @ManyToOne
+    @JoinColumn(name="team_id", nullable=false)
+    private TeamEntity team;
 
-    public PlayerEntity(String playerName, Long playerNumber, String playerTeam) {
+    public PlayerEntity(String playerName, Long playerNumber, TeamEntity team) {
         this.playerName = playerName;
         this.playerNumber = playerNumber;
-        this.playerTeam = playerTeam;
+        this.team = team;
     }
 }
