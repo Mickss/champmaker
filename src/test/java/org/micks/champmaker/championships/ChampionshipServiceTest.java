@@ -24,32 +24,30 @@ class ChampionshipServiceTest {
 
     @Test
     void shouldReturnChampionship() throws EntityNotFoundException {
-        // given
 
-        Optional<ChampionshipEntity> mockedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", "15 August"));
-        when(championshipRepository.findById(322L)).thenReturn(mockedChampionship);
+        // given
+        Optional<ChampionshipEntity> expectedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", "15 August"));
+        when(championshipRepository.findById(322L)).thenReturn(expectedChampionship);
 
         // when
-
         ChampionshipDTO championship = championshipService.getChampionship(322);
 
         // then
-
         assertThat(championship.getCity()).isEqualTo("Szczecin");
+        assertThat(championship.getName()).isEqualTo("Pomeranian");
+        assertThat(championship.getDate()).isEqualTo("15 August");
     }
 
     @Test
     void shouldThrowExceptionWhenNoChampionshipIsFound() {
-        // given
 
+        // given
         when(championshipRepository.findById(322L)).thenReturn(Optional.empty());
 
         // when
-
         Throwable throwable = catchThrowable(() -> championshipService.getChampionship(322));
 
         // then
-
         assertThat(throwable)
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessage("Can not find Championship with Id: 322");
