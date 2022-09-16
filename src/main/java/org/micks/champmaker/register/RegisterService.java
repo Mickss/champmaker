@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class RegisterService {
@@ -21,6 +22,6 @@ public class RegisterService {
     public List<Long> getRegisteredTeams(long champId) {
         List<RegisterEntity> registerEntities = registerRepository.findByChampId(champId);
         return registerEntities.stream()
-                .map(RegisterEntity::getTeamId).collect(Collectors.toList());
+                .map(RegisterEntity::getTeamId).collect(toList());
     }
 }
