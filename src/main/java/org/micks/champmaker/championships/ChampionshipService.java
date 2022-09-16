@@ -1,6 +1,7 @@
 package org.micks.champmaker.championships;
 
 import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,15 @@ public class ChampionshipService {
     @Autowired
     private ChampionshipRepository championshipRepository;
 
+    @Autowired
+    private RegisterService registerService;
+
     public ChampionshipDTO getChampionship(long champId) throws EntityNotFoundException {
         Optional<ChampionshipEntity> optionalChampionship = championshipRepository.findById(champId);
         if (optionalChampionship.isPresent()) {
             ChampionshipEntity championshipEntity = optionalChampionship.get();
-            return new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate());
+            List<Long> registeredTeams = registerService.getRegisteredTeams(champId);
+            return new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
         } else {
             throw new EntityNotFoundException("Can not find Championship with Id: " + champId);
         }
@@ -27,7 +32,10 @@ public class ChampionshipService {
     public List<ChampionshipDTO> getChampionships() {
         List<ChampionshipEntity> championshipList = championshipRepository.findAll();
         return championshipList.stream()
-                .map(championshipEntity -> new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate()))
+                .map(championshipEntity -> {
+                    List<Long> registeredTeams = registerService.getRegisteredTeams(championshipEntity.getId());
+                    return new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
+                })
                 .collect(Collectors.toList());
     }
 
