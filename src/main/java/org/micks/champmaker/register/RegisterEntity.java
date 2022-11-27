@@ -23,6 +23,7 @@ public class RegisterEntity {
     private Long champId;
     private Long teamId;
     private String registrationDate;
+    private String champGroup;
 
     public RegisterEntity(Long champId, Long teamId, String registrationDate) {
         this.champId = champId;
