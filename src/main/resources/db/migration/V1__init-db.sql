@@ -7,8 +7,7 @@ INSERT INTO team (name_team) VALUES ('Pogoń Pyton');
 INSERT INTO team (name_team) VALUES ('Frisbnik');
 INSERT INTO team (name_team) VALUES ('Ultimatum');
 INSERT INTO team (name_team) VALUES ('042 Lódz');
-INSERT INTO team (name_team) VALUES ('Fabrykańci');
-
+INSERT INTO team (name_team) VALUES ('Fabrykanci');
 
 INSERT INTO championship (city, date, name_champ) VALUES ('Szczecin', '15-02-2023', 'Pomeranian' );
 
