@@ -46,4 +46,9 @@ public class ChampionshipController {
     public void createChampionship(@RequestBody ChampionshipDTO championship) {
         championshipService.createChampionship(championship);
     }
+
+    @PutMapping(value = "/{champId}/shuffle-teams")
+    public void shuffleTeams(@PathVariable long champId) {
+        championshipService.shuffleTeams(champId);
+    }
 }
