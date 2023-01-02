@@ -53,8 +53,8 @@ public class ChampionshipService {
     public void shuffleTeams(long champId) {
         List<RegisterEntity> registeredTeamList = registerRepository.findByChampId(champId);
         Random random = new Random();
-        int counterA =0;
-        int counterB =0;
+        int counterA = 0;
+        int counterB = 0;
 
         for (RegisterEntity registeredTeamsGroup : registeredTeamList) {
             double randomNumber = random.nextInt(100);
@@ -63,10 +63,10 @@ public class ChampionshipService {
             int maxTeamsInGroup = countedTeams / 2;
             if (counterB >= maxTeamsInGroup || randomNumber >= 50 && counterA < maxTeamsInGroup) {
                 group = "A";
-                counterA += 1;
+                counterA++;
             } else {
                 group = "B";
-                counterB += 1;
+                counterB++;
             }
             registeredTeamsGroup.setChampGroup(group);
             registerRepository.save(registeredTeamsGroup);
