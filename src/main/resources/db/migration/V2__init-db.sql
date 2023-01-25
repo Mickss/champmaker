@@ -1,0 +1,33 @@
+INSERT INTO hat_team (name_hat_team) VALUES ('GUFA');
+INSERT INTO hat_team (name_hat_team) VALUES ('GIFA');
+INSERT INTO hat_team (name_hat_team) VALUES ('LIFA');
+INSERT INTO hat_team (name_hat_team) VALUES ('OMIF');
+INSERT INTO hat_team (name_hat_team) VALUES ('ZIBF');
+INSERT INTO hat_team (name_hat_team) VALUES ('HUFA');
+INSERT INTO hat_team (name_hat_team) VALUES ('PUFA');
+INSERT INTO hat_team (name_hat_team) VALUES ('FAFA');
+INSERT INTO hat_team (name_hat_team) VALUES ('RAPA');
+INSERT INTO hat_team (name_hat_team) VALUES ('RUFA');
+
+INSERT INTO championship (city, date, name_champ) VALUES ('Warsaw', '20-06-2023', 'Hatowisko' );
+
+INSERT INTO player (player_name, team_id) VALUES ('Conor Rodgers', 1);
+INSERT INTO player (player_name, team_id) VALUES ('Lian Aguilar', 2);
+INSERT INTO player (player_name, team_id) VALUES ('Allen Castro', 3);
+INSERT INTO player (player_name, team_id) VALUES ('Maurice Smith', 4);
+INSERT INTO player (player_name, team_id) VALUES ('Bruce Ward', 5);
+INSERT INTO player (player_name, team_id) VALUES ('Casper Henry', 6);
+INSERT INTO player (player_name, team_id) VALUES ('Hassan Avery', 7);
+INSERT INTO player (player_name, team_id) VALUES ('Uriah Hughes', 8);
+INSERT INTO player (player_name, team_id) VALUES ('Carter John', 9);
+INSERT INTO player (player_name, team_id) VALUES ('Jagger Todd', 10);
+INSERT INTO player (player_name, team_id) VALUES ('Marvin McGuire', 11);
+INSERT INTO player (player_name, team_id) VALUES ('Leo Proctor', 12);
+INSERT INTO player (player_name, team_id) VALUES ('Ted Lee', 13);
+INSERT INTO player (player_name, team_id) VALUES ('Langston Mejia', 14);
+INSERT INTO player (player_name, team_id) VALUES ('Bryson Johnson', 15);
+INSERT INTO player (player_name, team_id) VALUES ('Mustafa Gonzalez', 16);
+INSERT INTO player (player_name, team_id) VALUES ('Watson Garza', 17);
+INSERT INTO player (player_name, team_id) VALUES ('Owen Ellis', 18);
+INSERT INTO player (player_name, team_id) VALUES ('Shenandoah Cruz',19);
+INSERT INTO player (player_name, team_id) VALUES ('Orion Fraser', 20);
