@@ -30,9 +30,9 @@ public class PlayerController {
     }
 
     @GetMapping
-    public List<PlayerDTO> getPlayers(@RequestParam(required = false) Long teamId) {
-        log.info("Fetching players for team: {}", teamId);
-        return playerService.getPlayers(teamId);
+    public List<PlayerDTO> getPlayers(GetPlayersRequest getPlayersRequest) {
+        log.info("Fetching players for params: {}", getPlayersRequest);
+        return playerService.getPlayers(getPlayersRequest);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
