@@ -1,5 +1,6 @@
 package org.micks.champmaker.players;
 
+import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/players")
 @CrossOrigin
+@Slf4j
 public class PlayerController {
 
     @Autowired
@@ -27,8 +30,9 @@ public class PlayerController {
     }
 
     @GetMapping
-    public List<PlayerDTO> getPlayers() {
-        return playerService.getPlayers();
+    public List<PlayerDTO> getPlayers(@RequestParam(required = false) Long teamId) {
+        log.info("Fetching players for team: {}", teamId);
+        return playerService.getPlayers(teamId);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
