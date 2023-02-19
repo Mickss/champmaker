@@ -37,9 +37,12 @@ public class PlayerService {
         playerRepository.save(playerEntity);
     }
 
-    public List<PlayerDTO> getPlayers() {
+    public List<PlayerDTO> getPlayers(GetPlayersRequest getPlayersRequest) {
         List<PlayerEntity> playerList = playerRepository.findAll();
         return playerList.stream()
+                .filter(playerEntity -> getPlayersRequest.getTeamId() == null || playerEntity.getTeam().getId().equals(getPlayersRequest.getTeamId()))
+                .filter(playerEntity -> getPlayersRequest.getName() == null
+                        || playerEntity.getPlayerName().toLowerCase().contains(getPlayersRequest.getName().toLowerCase()))
                 .map(playerEntity -> new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getTeam().getId()))
                 .collect(Collectors.toList());
     }
