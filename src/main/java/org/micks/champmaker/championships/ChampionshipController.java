@@ -43,7 +43,7 @@ public class ChampionshipController {
 
     @GetMapping
     public List<ChampionshipDTO> getChampionships(@RequestParam(required = false) String city) {
-        log.info("Fetching city for params: {}", city);
+        log.info("Fetching championships by city: {}", city);
         return championshipService.getChampionships(city);
     }
 
