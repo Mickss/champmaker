@@ -35,9 +35,10 @@ public class ChampionshipService {
         }
     }
 
-    public List<ChampionshipDTO> getChampionships() {
+    public List<ChampionshipDTO> getChampionships(String city) {
         List<ChampionshipEntity> championshipList = championshipRepository.findAll();
         return championshipList.stream()
+                .filter(championshipEntity -> city == null || championshipEntity.getCity().contains(city))
                 .map(championshipEntity -> {
                     List<Long> registeredTeams = registerService.getRegisteredTeams(championshipEntity.getId());
                     return new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
