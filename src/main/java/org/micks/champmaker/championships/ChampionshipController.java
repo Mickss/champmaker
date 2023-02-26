@@ -1,5 +1,7 @@
 package org.micks.champmaker.championships;
 
+import ch.qos.logback.classic.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.EntityNotFoundException;
 import org.micks.champmaker.register.RegisterDTO;
 import org.micks.champmaker.register.RegisterService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/championships")
 @CrossOrigin
+@Slf4j
 public class ChampionshipController {
 
     @Autowired
@@ -38,8 +42,9 @@ public class ChampionshipController {
     }
 
     @GetMapping
-    public List<ChampionshipDTO> getChampionships() {
-        return championshipService.getChampionships();
+    public List<ChampionshipDTO> getChampionships(@RequestParam(required = false) String city) {
+        log.info("Fetching championships by city: {}", city);
+        return championshipService.getChampionships(city);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
