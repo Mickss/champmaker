@@ -25,14 +25,16 @@ public class PlayerEntity {
 
     private String playerName;
     private Long playerNumber;
+    private Long playerYear;
 
     @ManyToOne
     @JoinColumn(name="team_id", nullable=false)
     private TeamEntity team;
 
-    public PlayerEntity(String playerName, Long playerNumber, TeamEntity team) {
+    public PlayerEntity(String playerName, Long playerNumber, Long playerYear, TeamEntity team) {
         this.playerName = playerName;
         this.playerNumber = playerNumber;
+        this.playerYear = playerYear;
         this.team = team;
     }
 }
