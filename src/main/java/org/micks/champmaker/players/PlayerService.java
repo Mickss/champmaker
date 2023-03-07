@@ -22,7 +22,7 @@ public class PlayerService {
         Optional<PlayerEntity> optionalPlayer = playerRepository.findById(playerId);
         if (optionalPlayer.isPresent()) {
             PlayerEntity playerEntity = optionalPlayer.get();
-            return new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getTeam().getId());
+            return new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getPlayerYear(), playerEntity.getTeam().getId());
         } else {
             throw new EntityNotFoundException("Cannot find player with Id: " + playerId);
         }
@@ -33,7 +33,7 @@ public class PlayerService {
         if (team.isEmpty()) {
             throw new EntityNotFoundException("Cannot find team by Id: " + playerDTO.getTeamId());
         }
-        PlayerEntity playerEntity = new PlayerEntity(playerDTO.getPlayerName(), playerDTO.getPlayerNumber(), team.get());
+        PlayerEntity playerEntity = new PlayerEntity(playerDTO.getPlayerName(), playerDTO.getPlayerNumber(), playerDTO.getPlayerYear(), team.get());
         playerRepository.save(playerEntity);
     }
 
@@ -43,7 +43,7 @@ public class PlayerService {
                 .filter(playerEntity -> getPlayersRequest.getTeamId() == null || playerEntity.getTeam().getId().equals(getPlayersRequest.getTeamId()))
                 .filter(playerEntity -> getPlayersRequest.getName() == null
                         || playerEntity.getPlayerName().toLowerCase().contains(getPlayersRequest.getName().toLowerCase()))
-                .map(playerEntity -> new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getTeam().getId()))
+                .map(playerEntity -> new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getPlayerYear(), playerEntity.getTeam().getId()))
                 .collect(Collectors.toList());
     }
 }
