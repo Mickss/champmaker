@@ -52,6 +52,11 @@ public class ChampionshipController {
         return championshipService.getChampionships(city);
     }
 
+    @GetMapping("/{champId}/registered-players")
+    public List<Long> getRegisteredPlayers(@PathVariable long champId, @RequestParam long teamId) {
+        return registerService.getRegisteredPlayers(champId, teamId);
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createChampionship(@RequestBody ChampionshipDTO championship) {
         championshipService.createChampionship(championship);
