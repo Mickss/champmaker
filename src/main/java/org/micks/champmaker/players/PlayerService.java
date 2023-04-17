@@ -46,4 +46,14 @@ public class PlayerService {
                 .map(playerEntity -> new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getPlayerYear(), playerEntity.getTeam().getId()))
                 .collect(Collectors.toList());
     }
+
+    public List<Long> getPlayersIds(long teamId) {
+        List<PlayerEntity> allPlayers = playerRepository.findAll();
+        List<PlayerEntity> playersForTeam = allPlayers.stream()
+                .filter(playerEntity -> playerEntity.getTeam().getId() == teamId)
+                .collect(Collectors.toList());
+        return playersForTeam.stream()
+                .map(PlayerEntity::getId)
+                .collect(Collectors.toList());
+    }
 }

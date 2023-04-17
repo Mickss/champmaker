@@ -1,5 +1,6 @@
 package org.micks.champmaker.register;
 
+import org.micks.champmaker.players.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,22 @@ public class RegisterService {
     @Autowired
     private RegisterPlayerRepository registerPlayerRepository;
 
+    @Autowired
+    private PlayerService playerService;
+
     public void registerTeamToChampionship(Long champId, RegisterDTO registerDTO) {
         RegisterEntity registerEntity = new RegisterEntity(champId, registerDTO.getTeamId(), registerDTO.getRegistrationDate());
         registerRepository.save(registerEntity);
+    }
+
+    public List<Long> getRegisteredPlayers(long champId, long teamId) {
+        List<RegisterPlayerEntity> registeredPlayers = registerPlayerRepository.findByChampId(champId);
+        List<Long> registeredPlayersIds = registeredPlayers.stream()
+                .map(RegisterPlayerEntity::getPlayerId)
+                .collect(toList());
+        return playerService.getPlayersIds(teamId).stream()
+                .filter(registeredPlayersIds::contains)
+                .collect(toList());
     }
 
     public List<Long> getRegisteredTeams(long champId) {
