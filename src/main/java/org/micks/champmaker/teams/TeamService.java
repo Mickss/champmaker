@@ -18,7 +18,7 @@ public class TeamService {
         Optional<TeamEntity> optionalTeam = teamRepository.findById(teamId);
         if (optionalTeam.isPresent()) {
             TeamEntity teamEntity = optionalTeam.get();
-            return new TeamDTO(teamEntity.getNameTeam());
+            return new TeamDTO(teamEntity.getName());
         } else {
             throw new EntityNotFoundException("Cannot find team with Id: " + teamId);
         }
@@ -27,7 +27,7 @@ public class TeamService {
     public List<TeamDTO> getTeams() {
         List<TeamEntity> teamList = teamRepository.findAll();
         return teamList.stream()
-                .map(teamEntity -> new TeamDTO(teamEntity.getNameTeam()))
+                .map(teamEntity -> new TeamDTO(teamEntity.getName()))
                 .collect(Collectors.toList());
     }
 

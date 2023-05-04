@@ -1,8 +1,5 @@
 package org.micks.champmaker.teams;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.micks.champmaker.players.PlayerEntity;
 
 import javax.persistence.Entity;
@@ -15,20 +12,24 @@ import java.util.List;
 
 @Table(name = "team")
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class TeamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameTeam;
+    private String name;
 
     @OneToMany(mappedBy = "team")
     private List<PlayerEntity> players;
 
+    public TeamEntity() {
+    }
+
     public TeamEntity(String nameTeam) {
-        this.nameTeam = nameTeam;
+        this.name = nameTeam;
+    }
+
+    public String getName() {
+        return name;
     }
 }
