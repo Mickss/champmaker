@@ -29,6 +29,10 @@ public class TeamEntity {
         this.name = nameTeam;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

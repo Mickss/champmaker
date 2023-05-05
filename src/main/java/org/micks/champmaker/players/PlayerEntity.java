@@ -1,6 +1,7 @@
 package org.micks.champmaker.players;
 
 import org.micks.champmaker.teams.TeamEntity;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
