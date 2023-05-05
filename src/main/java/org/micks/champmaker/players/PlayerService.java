@@ -22,7 +22,7 @@ public class PlayerService {
         Optional<PlayerEntity> optionalPlayer = playerRepository.findById(playerId);
         if (optionalPlayer.isPresent()) {
             PlayerEntity playerEntity = optionalPlayer.get();
-            return new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getPlayerYear(), playerEntity.getTeam().getId());
+            return new PlayerDTO(playerEntity.getName(), playerEntity.getNumber(), playerEntity.getYear(), playerEntity.getTeam().getId());
         } else {
             throw new EntityNotFoundException("Cannot find player with Id: " + playerId);
         }
@@ -42,8 +42,8 @@ public class PlayerService {
         return playerList.stream()
                 .filter(playerEntity -> getPlayersRequest.getTeamId() == null || playerEntity.getTeam().getId().equals(getPlayersRequest.getTeamId()))
                 .filter(playerEntity -> getPlayersRequest.getName() == null
-                        || playerEntity.getPlayerName().toLowerCase().contains(getPlayersRequest.getName().toLowerCase()))
-                .map(playerEntity -> new PlayerDTO(playerEntity.getPlayerName(), playerEntity.getPlayerNumber(), playerEntity.getPlayerYear(), playerEntity.getTeam().getId()))
+                        || playerEntity.getName().toLowerCase().contains(getPlayersRequest.getName().toLowerCase()))
+                .map(playerEntity -> new PlayerDTO(playerEntity.getName(), playerEntity.getNumber(), playerEntity.getYear(), playerEntity.getTeam().getId()))
                 .collect(Collectors.toList());
     }
 

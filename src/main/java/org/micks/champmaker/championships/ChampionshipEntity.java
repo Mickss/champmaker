@@ -1,9 +1,5 @@
 package org.micks.champmaker.championships;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,21 +8,37 @@ import javax.persistence.Table;
 
 @Table(name = "championship")
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class ChampionshipEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameChamp;
+    private String name;
     private String city;
     private String date;
 
-    public ChampionshipEntity(String nameChamp, String city, String date) {
-        this.nameChamp = nameChamp;
+    public ChampionshipEntity() {
+    }
+
+    public ChampionshipEntity(String name, String city, String date) {
+        this.name = name;
         this.city = city;
         this.date = date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

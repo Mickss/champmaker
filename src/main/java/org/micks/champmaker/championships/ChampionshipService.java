@@ -29,7 +29,7 @@ public class ChampionshipService {
         if (optionalChampionship.isPresent()) {
             ChampionshipEntity championshipEntity = optionalChampionship.get();
             List<Long> registeredTeams = registerService.getRegisteredTeams(champId);
-            return new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
+            return new ChampionshipDTO(championshipEntity.getName(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
         } else {
             throw new EntityNotFoundException("Can not find Championship with Id: " + champId);
         }
@@ -41,7 +41,7 @@ public class ChampionshipService {
                 .filter(championshipEntity -> city == null || championshipEntity.getCity().contains(city))
                 .map(championshipEntity -> {
                     List<Long> registeredTeams = registerService.getRegisteredTeams(championshipEntity.getId());
-                    return new ChampionshipDTO(championshipEntity.getNameChamp(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
+                    return new ChampionshipDTO(championshipEntity.getName(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
                 })
                 .collect(Collectors.toList());
     }
