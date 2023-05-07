@@ -3,6 +3,7 @@ package org.micks.champmaker.championships;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.register.RegisterService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,6 +22,9 @@ class ChampionshipServiceTest {
 
     @Mock
     private ChampionshipRepository championshipRepository;
+
+    @Mock
+    private RegisterService registerService;
 
     @Test
     void shouldReturnChampionship() throws EntityNotFoundException {
