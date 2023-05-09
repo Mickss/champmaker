@@ -52,9 +52,9 @@ public class ChampionshipService {
     }
 
     public void editingChampionship(long champId, ChampionshipDTO championshipDTO) throws EntityNotFoundException {
-        Optional<ChampionshipEntity> editChamps = championshipRepository.findById(champId);
-        if (editChamps.isPresent()) {
-            ChampionshipEntity championshipEntity = editChamps.get();
+        Optional<ChampionshipEntity> optionalChampionship = championshipRepository.findById(champId);
+        if (optionalChampionship.isPresent()) {
+            ChampionshipEntity championshipEntity = optionalChampionship.get();
             championshipEntity.setName(championshipDTO.getName());
             championshipEntity.setCity(championshipDTO.getCity());
             championshipEntity.setDate(championshipDTO.getDate());
