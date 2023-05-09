@@ -62,6 +62,11 @@ public class ChampionshipController {
         championshipService.createChampionship(championship);
     }
 
+    @PutMapping(value = "/{champId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void editingChampionship(@PathVariable long champId, @RequestBody ChampionshipDTO championshipDTO) throws EntityNotFoundException {
+        championshipService.editingChampionship(champId, championshipDTO);
+    }
+
     @PutMapping(value = "/{champId}/shuffle-teams")
     public void shuffleTeams(@PathVariable long champId) {
         championshipService.shuffleTeams(champId);

@@ -51,6 +51,19 @@ public class ChampionshipService {
         championshipRepository.save(championshipEntity);
     }
 
+    public void editingChampionship(long champId, ChampionshipDTO championshipDTO) throws EntityNotFoundException {
+        Optional<ChampionshipEntity> editChamps = championshipRepository.findById(champId);
+        if (editChamps.isPresent()) {
+            ChampionshipEntity championshipEntity = editChamps.get();
+            championshipEntity.setName(championshipDTO.getName());
+            championshipEntity.setCity(championshipDTO.getCity());
+            championshipEntity.setDate(championshipDTO.getDate());
+            championshipRepository.save(championshipEntity);
+        } else {
+            throw new EntityNotFoundException("Can not find Championship with Id: " + champId);
+        }
+    }
+
     public void shuffleTeams(long champId) {
         List<RegisterEntity> registeredTeamList = registerRepository.findByChampId(champId);
         Random random = new Random();
