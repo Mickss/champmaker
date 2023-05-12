@@ -2,6 +2,8 @@ package org.micks.champmaker.championships;
 
 import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.meals.MealDTO;
+import org.micks.champmaker.meals.MealService;
 import org.micks.champmaker.register.RegisterDTO;
 import org.micks.champmaker.register.RegisterService;
 import org.micks.champmaker.register.RegisterPlayerDTO;
@@ -30,6 +32,9 @@ public class ChampionshipController {
 
     @Autowired
     private RegisterService registerService;
+
+    @Autowired
+    private MealService mealService;
 
     @GetMapping("/{champId}")
     public ChampionshipDTO getChampionship(@PathVariable long champId) throws EntityNotFoundException {
@@ -70,5 +75,10 @@ public class ChampionshipController {
     @PutMapping(value = "/{champId}/shuffle-teams")
     public void shuffleTeams(@PathVariable long champId) {
         championshipService.shuffleTeams(champId);
+    }
+
+    @PostMapping(value = "/championships/{champId}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createMeal(@RequestBody MealDTO mealDTO) {
+        mealService.createMeal(mealDTO);
     }
 }
