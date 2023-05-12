@@ -13,15 +13,29 @@ public class MealEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long champId;
     private String name;
     private boolean vegeOption;
 
     public MealEntity() {
     }
 
-    public MealEntity(String name, boolean vegeOption) {
+    public MealEntity(Long champId, String name, boolean vegeOption) {
+        this.champId = champId;
         this.name = name;
         this.vegeOption = vegeOption;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setVegeOption(boolean vegeOption) {
+        this.vegeOption = vegeOption;
+    }
+
+    public Long getChampId() {
+        return champId;
     }
 
     public String getName() {

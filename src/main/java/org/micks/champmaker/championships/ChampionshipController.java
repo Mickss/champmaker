@@ -5,8 +5,8 @@ import org.micks.champmaker.EntityNotFoundException;
 import org.micks.champmaker.meals.MealDTO;
 import org.micks.champmaker.meals.MealService;
 import org.micks.champmaker.register.RegisterDTO;
-import org.micks.champmaker.register.RegisterService;
 import org.micks.champmaker.register.RegisterPlayerDTO;
+import org.micks.champmaker.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,7 +47,7 @@ public class ChampionshipController {
     }
 
     @PutMapping(value = "{champId}/register-player", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void registerPlayerToChampionship(@PathVariable long champId, @RequestBody RegisterPlayerDTO registerPlayerDTO){
+    public void registerPlayerToChampionship(@PathVariable long champId, @RequestBody RegisterPlayerDTO registerPlayerDTO) {
         registerService.registerPlayer(champId, registerPlayerDTO);
     }
 
@@ -77,8 +77,18 @@ public class ChampionshipController {
         championshipService.shuffleTeams(champId);
     }
 
-    @PostMapping(value = "/championships/{champId}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createMeal(@RequestBody MealDTO mealDTO) {
-        mealService.createMeal(mealDTO);
+    @PostMapping(value = "/{champId}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createMeal(@PathVariable long champId, @RequestBody MealDTO mealDTO) {
+        mealService.createMeal(champId, mealDTO);
+    }
+
+    @PutMapping(value = "/{champId}/meals")
+    public void editMeals(@PathVariable long champId, @RequestBody MealDTO mealDTO) {
+        mealService.editMeals(champId, mealDTO);
+    }
+
+    @GetMapping("/{champId}/meals")
+    public List<MealDTO> getMeals(@PathVariable long champId) {
+       return mealService.getMeals(champId);
     }
 }
