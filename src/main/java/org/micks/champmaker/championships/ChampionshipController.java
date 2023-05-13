@@ -82,7 +82,7 @@ public class ChampionshipController {
         mealService.createMeal(champId, mealDTO);
     }
 
-    @PutMapping(value = "/{champId}/meals")
+    @PutMapping(value = "/{champId}/meals/{mealId}")
     public void editMeal(@PathVariable long champId, @PathVariable long mealId, @RequestBody MealDTO mealDTO) {
         mealService.editMeal(champId, mealId, mealDTO);
     }
