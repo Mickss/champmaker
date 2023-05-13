@@ -83,12 +83,12 @@ public class ChampionshipController {
     }
 
     @PutMapping(value = "/{champId}/meals")
-    public void editMeals(@PathVariable long champId, @RequestBody MealDTO mealDTO) {
-        mealService.editMeals(champId, mealDTO);
+    public void editMeal(@PathVariable long champId, @PathVariable long mealId, @RequestBody MealDTO mealDTO) {
+        mealService.editMeal(champId, mealId, mealDTO);
     }
 
     @GetMapping("/{champId}/meals")
     public List<MealDTO> getMeals(@PathVariable long champId) {
-       return mealService.getMeals(champId);
+        return mealService.getMeals(champId);
     }
 }

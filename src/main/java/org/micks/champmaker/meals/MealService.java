@@ -19,19 +19,19 @@ public class MealService {
         mealRepository.save(mealEntity);
     }
 
-    public void editMeals(long champId, MealDTO mealDTO) throws EntityNotFoundException {
-        Optional<MealEntity> optionalMeal = mealRepository.findById(champId);
+    public void editMeal(long champId, long mealId, MealDTO mealDTO) throws EntityNotFoundException {
+        Optional<MealEntity> optionalMeal = mealRepository.findById(mealId);
         if (optionalMeal.isPresent()) {
             MealEntity mealEntity = optionalMeal.get();
             mealEntity.setName(mealDTO.getName());
             mealEntity.setVegeOption(mealDTO.isVegeOption());
             mealRepository.save(mealEntity);
         } else {
-            throw new EntityNotFoundException("Can not find meal with Id: " + champId);
+            throw new EntityNotFoundException("Can not find meal with Id: " + mealId);
         }
     }
 
-    public List<MealDTO> getMeals(long champId) {
+    public List<MealDTO> getMeals(long mealId) {
         List<MealEntity> mealList = mealRepository.findAll();
         return mealList.stream()
                 .map(mealEntity -> new MealDTO(mealEntity.getChampId(), mealEntity.getName(), mealEntity.isVegeOption()))
