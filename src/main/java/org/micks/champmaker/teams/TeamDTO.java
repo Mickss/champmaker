@@ -1,17 +1,27 @@
 package org.micks.champmaker.teams;
 
+import javax.validation.constraints.NotNull;
+
 public class TeamDTO {
 
-    private String nameTeam;
+    private Long id;
 
-    public TeamDTO(){
+    @NotNull
+    private String name;
+
+    public TeamDTO() {
     }
 
-    public TeamDTO(String nameTeam) {
-        this.nameTeam = nameTeam;
+    public TeamDTO(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public String getNameTeam() {
-        return nameTeam;
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }

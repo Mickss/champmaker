@@ -22,7 +22,7 @@ public class PlayerService {
         Optional<PlayerEntity> optionalPlayer = playerRepository.findById(playerId);
         if (optionalPlayer.isPresent()) {
             PlayerEntity playerEntity = optionalPlayer.get();
-            return new PlayerDTO(playerEntity.getName(), playerEntity.getNumber(), playerEntity.getYear(), playerEntity.getTeam().getId());
+            return new PlayerDTO(playerEntity.getId(), playerEntity.getTeam().getId(), playerEntity.getName(), playerEntity.getShirtNumber(), playerEntity.getAge());
         } else {
             throw new EntityNotFoundException("Cannot find player with Id: " + playerId);
         }
@@ -33,7 +33,7 @@ public class PlayerService {
         if (team.isEmpty()) {
             throw new EntityNotFoundException("Cannot find team by Id: " + playerDTO.getTeamId());
         }
-        PlayerEntity playerEntity = new PlayerEntity(playerDTO.getPlayerName(), playerDTO.getPlayerNumber(), playerDTO.getPlayerYear(), team.get());
+        PlayerEntity playerEntity = new PlayerEntity(playerDTO.getName(), playerDTO.getShirtNumber(), playerDTO.getAge(), team.get());
         playerRepository.save(playerEntity);
     }
 
@@ -43,7 +43,7 @@ public class PlayerService {
                 .filter(playerEntity -> getPlayersRequest.getTeamId() == null || playerEntity.getTeam().getId().equals(getPlayersRequest.getTeamId()))
                 .filter(playerEntity -> getPlayersRequest.getName() == null
                         || playerEntity.getName().toLowerCase().contains(getPlayersRequest.getName().toLowerCase()))
-                .map(playerEntity -> new PlayerDTO(playerEntity.getName(), playerEntity.getNumber(), playerEntity.getYear(), playerEntity.getTeam().getId()))
+                .map(playerEntity -> new PlayerDTO(playerEntity.getId(), playerEntity.getTeam().getId(), playerEntity.getName(), playerEntity.getShirtNumber(), playerEntity.getAge()))
                 .collect(Collectors.toList());
     }
 
@@ -51,7 +51,7 @@ public class PlayerService {
         List<PlayerEntity> allPlayers = playerRepository.findAll();
         List<PlayerEntity> playersForTeam = allPlayers.stream()
                 .filter(playerEntity -> playerEntity.getTeam().getId() == teamId)
-                .collect(Collectors.toList());
+                .toList();
         return playersForTeam.stream()
                 .map(PlayerEntity::getId)
                 .collect(Collectors.toList());

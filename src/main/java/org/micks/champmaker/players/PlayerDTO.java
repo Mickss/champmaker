@@ -1,35 +1,49 @@
 package org.micks.champmaker.players;
 
+import javax.validation.constraints.NotNull;
+
 public class PlayerDTO {
 
-    private String playerName;
-    private Long playerNumber;
-    private Long playerYear;
+    private Long id;
+
     private Long teamId;
+
+    @NotNull
+    private String name;
+
+    private Long shirtNumber;
+
+    @NotNull
+    private Long age;
 
     public PlayerDTO() {
     }
 
-    public PlayerDTO(String playerName, Long playerNumber, Long playerYear, Long teamId) {
-        this.playerName = playerName;
-        this.playerNumber = playerNumber;
-        this.playerYear = playerYear;
+    public PlayerDTO(Long id, Long teamId, String name, Long shirtNumber, Long age) {
+        this.id = id;
         this.teamId = teamId;
+        this.name = name;
+        this.shirtNumber = shirtNumber;
+        this.age = age;
     }
 
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public Long getPlayerNumber() {
-        return playerNumber;
-    }
-
-    public Long getPlayerYear() {
-        return playerYear;
+    public Long getId() {
+        return id;
     }
 
     public Long getTeamId() {
         return teamId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Long getShirtNumber() {
+        return shirtNumber;
+    }
+
+    public Long getAge() {
+        return age;
     }
 }
