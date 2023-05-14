@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class PlayerController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createPlayer(@RequestBody PlayerDTO playerDTO) throws EntityNotFoundException {
+    public void createPlayer(@Valid @RequestBody PlayerDTO playerDTO) throws EntityNotFoundException {
         playerService.createPlayer(playerDTO);
     }
 }

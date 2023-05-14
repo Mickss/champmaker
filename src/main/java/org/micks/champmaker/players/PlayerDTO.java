@@ -1,7 +1,10 @@
 package org.micks.champmaker.players;
 
+import javax.validation.constraints.Size;
+
 public class PlayerDTO {
 
+    @Size(min = 2)
     private String playerName;
     private Long playerNumber;
     private Long playerYear;
