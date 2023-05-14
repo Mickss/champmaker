@@ -1,7 +1,7 @@
 package org.micks.champmaker.players;
 
 import lombok.extern.slf4j.Slf4j;
-import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;

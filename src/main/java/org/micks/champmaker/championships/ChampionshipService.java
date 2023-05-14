@@ -1,6 +1,6 @@
 package org.micks.champmaker.championships;
 
-import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.register.RegisterEntity;
 import org.micks.champmaker.register.RegisterRepository;
 import org.micks.champmaker.register.RegisterService;

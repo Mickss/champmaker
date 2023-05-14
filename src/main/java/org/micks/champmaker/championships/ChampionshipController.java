@@ -1,10 +1,12 @@
 package org.micks.champmaker.championships;
 
 import lombok.extern.slf4j.Slf4j;
-import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.exceptions.EntityNotFoundException;
+import org.micks.champmaker.meals.MealDTO;
+import org.micks.champmaker.meals.MealService;
 import org.micks.champmaker.register.RegisterDTO;
-import org.micks.champmaker.register.RegisterService;
 import org.micks.champmaker.register.RegisterPlayerDTO;
+import org.micks.champmaker.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +33,9 @@ public class ChampionshipController {
     @Autowired
     private RegisterService registerService;
 
+    @Autowired
+    private MealService mealService;
+
     @GetMapping("/{champId}")
     public ChampionshipDTO getChampionship(@PathVariable long champId) throws EntityNotFoundException {
         return championshipService.getChampionship(champId);
@@ -42,7 +47,7 @@ public class ChampionshipController {
     }
 
     @PutMapping(value = "{champId}/register-player", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void registerPlayerToChampionship(@PathVariable long champId, @RequestBody RegisterPlayerDTO registerPlayerDTO){
+    public void registerPlayerToChampionship(@PathVariable long champId, @RequestBody RegisterPlayerDTO registerPlayerDTO) {
         registerService.registerPlayer(champId, registerPlayerDTO);
     }
 
@@ -70,5 +75,25 @@ public class ChampionshipController {
     @PutMapping(value = "/{champId}/shuffle-teams")
     public void shuffleTeams(@PathVariable long champId) {
         championshipService.shuffleTeams(champId);
+    }
+
+    @PostMapping(value = "/{champId}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createMeal(@PathVariable long champId, @RequestBody MealDTO mealDTO) {
+        mealService.createMeal(champId, mealDTO);
+    }
+
+    @PutMapping(value = "/{champId}/meals/{mealId}")
+    public void editMeal(@PathVariable long champId, @PathVariable long mealId, @RequestBody MealDTO mealDTO) {
+        mealService.editMeal(champId, mealId, mealDTO);
+    }
+
+    @GetMapping("/{champId}/meals")
+    public List<MealDTO> getMeals(@PathVariable long champId) {
+        return mealService.getMeals(champId);
+    }
+
+    @GetMapping("/{champId}/meals/{mealId}")
+    public MealDTO getMeal(@PathVariable long champId, @PathVariable long mealId) {
+        return mealService.getMeal(champId, mealId);
     }
 }
