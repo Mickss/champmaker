@@ -1,6 +1,6 @@
 package org.micks.champmaker.players;
 
-import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.teams.TeamEntity;
 import org.micks.champmaker.teams.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;

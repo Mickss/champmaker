@@ -1,7 +1,7 @@
 package org.micks.champmaker.championships;
 
 import lombok.extern.slf4j.Slf4j;
-import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.meals.MealDTO;
 import org.micks.champmaker.meals.MealService;
 import org.micks.champmaker.register.RegisterDTO;
@@ -90,5 +90,10 @@ public class ChampionshipController {
     @GetMapping("/{champId}/meals")
     public List<MealDTO> getMeals(@PathVariable long champId) {
         return mealService.getMeals(champId);
+    }
+
+    @GetMapping("/{champId}/meals/{mealId}")
+    public MealDTO getMeal(@PathVariable long champId, @PathVariable long mealId) {
+        return mealService.getMeal(champId, mealId);
     }
 }

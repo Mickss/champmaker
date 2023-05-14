@@ -2,7 +2,7 @@ package org.micks.champmaker.championships;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.micks.champmaker.EntityNotFoundException;
+import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.register.RegisterService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
