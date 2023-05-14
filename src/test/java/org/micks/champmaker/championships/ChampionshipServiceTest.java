@@ -82,6 +82,27 @@ class ChampionshipServiceTest {
         assertThat(championshipsInWarsaw).hasSize(3);
     }
 
+    @Test
+    @MockitoSettings(strictness = Strictness.LENIENT)
+    void shouldGetChampionshipsWithoutFiltering() {
+
+        // given
+        List<ChampionshipEntity> mockedChampionships = List.of(
+                mockChampionship(301L, "Pomernian", "Szczecin", "1999-01-11"),
+                mockChampionship(302L, "WLU2022", "Warszawa", "1999-01-10"),
+                mockChampionship(303L, "WLU2023", "Warszawa", "1999-01-14"),
+                mockChampionship(304L, "Snejk", "Warszawa Bemowo", "1999-01-12"),
+                mockChampionship(305L, "Puffiaki", "Poznań", "1999-01-18")
+        );
+        when(championshipRepository.findAll()).thenReturn(mockedChampionships);
+
+        // when
+        List<ChampionshipDTO> championshipsInWarsaw = championshipService.getChampionships(null);
+
+        // then
+        assertThat(championshipsInWarsaw).hasSize(5);
+    }
+
     private ChampionshipEntity mockChampionship(long id, String name, String city, String date) {
         ChampionshipEntity mockedChampionship = mock(ChampionshipEntity.class);
         when(mockedChampionship.getId()).thenReturn(id);
