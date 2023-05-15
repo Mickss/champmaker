@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -63,13 +64,13 @@ public class ChampionshipController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createChampionship(@RequestBody ChampionshipDTO championship) {
+    public void createChampionship(@Valid @RequestBody ChampionshipDTO championship) {
         championshipService.createChampionship(championship);
     }
 
     @PutMapping(value = "/{champId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void editingChampionship(@PathVariable long champId, @RequestBody ChampionshipDTO championshipDTO) throws EntityNotFoundException {
-        championshipService.editingChampionship(champId, championshipDTO);
+    public void editChampionship(@PathVariable long champId, @Valid @RequestBody ChampionshipDTO championshipDTO) throws EntityNotFoundException {
+        championshipService.editChampionship(champId, championshipDTO);
     }
 
     @PutMapping(value = "/{champId}/shuffle-teams")

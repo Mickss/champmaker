@@ -18,8 +18,8 @@ public class PlayerEntity {
     private Long id;
 
     private String name;
-    private Long number;
-    private Long year;
+    private Long shirtNumber;
+    private String birthDate;
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
@@ -28,10 +28,10 @@ public class PlayerEntity {
     public PlayerEntity() {
     }
 
-    public PlayerEntity(String name, Long number, Long year, TeamEntity team) {
+    public PlayerEntity(String name, Long shirtNumber, String birthDate, TeamEntity team) {
         this.name = name;
-        this.number = number;
-        this.year = year;
+        this.shirtNumber = shirtNumber;
+        this.birthDate = birthDate;
         this.team = team;
     }
 
@@ -43,12 +43,12 @@ public class PlayerEntity {
         return name;
     }
 
-    public Long getNumber() {
-        return number;
+    public Long getShirtNumber() {
+        return shirtNumber;
     }
 
-    public Long getYear() {
-        return year;
+    public String getBirthDate() {
+        return birthDate;
     }
 
     public TeamEntity getTeam() {

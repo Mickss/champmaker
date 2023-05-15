@@ -26,18 +26,6 @@ public class ChampionshipEntity {
         this.date = date;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public Long getId() {
         return id;
     }
@@ -46,11 +34,23 @@ public class ChampionshipEntity {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getCity() {
         return city;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
