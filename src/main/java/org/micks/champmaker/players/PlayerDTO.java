@@ -1,6 +1,7 @@
 package org.micks.champmaker.players;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class PlayerDTO {
 
@@ -9,6 +10,7 @@ public class PlayerDTO {
     private Long teamId;
 
     @NotNull
+    @Size(min = 2)
     private String name;
 
     private Long shirtNumber;
