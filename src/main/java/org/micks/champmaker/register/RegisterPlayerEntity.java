@@ -20,10 +20,12 @@ public class RegisterPlayerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long mealId;
     private Long champId;
     private Long playerId;
 
-    public RegisterPlayerEntity(Long champId, Long playerId) {
+    public RegisterPlayerEntity(Long mealId, Long champId, Long playerId) {
+        this.mealId = mealId;
         this.champId = champId;
         this.playerId = playerId;
     }

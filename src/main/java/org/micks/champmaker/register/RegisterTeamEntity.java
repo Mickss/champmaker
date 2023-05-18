@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RegisterEntity {
+public class RegisterTeamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class RegisterEntity {
     private String registrationDate;
     private String champGroup;
 
-    public RegisterEntity(Long champId, Long teamId, String registrationDate) {
+    public RegisterTeamEntity(Long champId, Long teamId, String registrationDate) {
         this.champId = champId;
         this.teamId = teamId;
         this.registrationDate = registrationDate;

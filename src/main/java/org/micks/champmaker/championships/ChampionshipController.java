@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.meals.MealDTO;
 import org.micks.champmaker.meals.MealService;
-import org.micks.champmaker.register.RegisterDTO;
+import org.micks.champmaker.register.RegisterTeamDTO;
 import org.micks.champmaker.register.RegisterPlayerDTO;
 import org.micks.champmaker.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +43,8 @@ public class ChampionshipController {
     }
 
     @PutMapping(value = "{champId}/register-team", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void registerTeamToChampionship(@PathVariable long champId, @RequestBody RegisterDTO registerDTO) {
-        registerService.registerTeamToChampionship(champId, registerDTO);
+    public void registerTeamToChampionship(@PathVariable long champId, @RequestBody RegisterTeamDTO registerTeamDTO) {
+        registerService.registerTeamToChampionship(champId, registerTeamDTO);
     }
 
     @PutMapping(value = "{champId}/register-player", consumes = MediaType.APPLICATION_JSON_VALUE)
