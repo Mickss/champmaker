@@ -42,7 +42,7 @@ public class RegisterService {
     }
 
     public void registerPlayer(long champId, RegisterPlayerDTO registerPlayerDTO) {
-        RegisterPlayerEntity registerPlayerEntity = new RegisterPlayerEntity(champId, registerPlayerDTO.getMealId(), registerPlayerDTO.getPlayerId());
+        RegisterPlayerEntity registerPlayerEntity = new RegisterPlayerEntity(champId, registerPlayerDTO.getPlayerId(), registerPlayerDTO.getMealId());
         registerPlayerRepository.save(registerPlayerEntity);
     }
 }
