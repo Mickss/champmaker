@@ -1,13 +1,13 @@
 package org.micks.champmaker.register;
 
-public class RegisterDTO {
+public class RegisterTeamDTO {
     private long teamId;
     private String registrationDate;
 
-    public RegisterDTO() {
+    public RegisterTeamDTO() {
     }
 
-    public RegisterDTO(long teamId, String registrationDate) {
+    public RegisterTeamDTO(long teamId, String registrationDate) {
         this.teamId = teamId;
         this.registrationDate = registrationDate;
     }

@@ -22,9 +22,11 @@ public class RegisterPlayerEntity {
 
     private Long champId;
     private Long playerId;
+    private Long mealId;
 
-    public RegisterPlayerEntity(Long champId, Long playerId) {
+    public RegisterPlayerEntity(Long champId, Long playerId, Long mealId) {
         this.champId = champId;
         this.playerId = playerId;
+        this.mealId = mealId;
     }
 }

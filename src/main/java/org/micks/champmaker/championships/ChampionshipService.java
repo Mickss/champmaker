@@ -1,7 +1,7 @@
 package org.micks.champmaker.championships;
 
 import org.micks.champmaker.exceptions.EntityNotFoundException;
-import org.micks.champmaker.register.RegisterEntity;
+import org.micks.champmaker.register.RegisterTeamEntity;
 import org.micks.champmaker.register.RegisterRepository;
 import org.micks.champmaker.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,12 +65,12 @@ public class ChampionshipService {
     }
 
     public void shuffleTeams(long champId) {
-        List<RegisterEntity> registeredTeamList = registerRepository.findByChampId(champId);
+        List<RegisterTeamEntity> registeredTeamList = registerRepository.findByChampId(champId);
         Random random = new Random();
         int counterA = 0;
         int counterB = 0;
 
-        for (RegisterEntity registeredTeamsGroup : registeredTeamList) {
+        for (RegisterTeamEntity registeredTeamsGroup : registeredTeamList) {
             double randomNumber = random.nextInt(100);
             String group;
             int countedTeams = registeredTeamList.size();
