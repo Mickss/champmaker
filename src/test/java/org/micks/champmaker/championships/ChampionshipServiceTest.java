@@ -10,6 +10,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +33,8 @@ class ChampionshipServiceTest {
 
     @Mock
     private RegisterService registerService;
+
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     @Test
     void shouldReturnChampionship() throws EntityNotFoundException {
@@ -66,15 +71,15 @@ class ChampionshipServiceTest {
 
     @Test
     @MockitoSettings(strictness = Strictness.LENIENT)
-    void shouldFilterChampionshipsByCity() {
+    void shouldFilterChampionshipsByCity() throws ParseException {
 
         // given
         List<ChampionshipEntity> mockedChampionships = List.of(
-                mockChampionship(301L, "Pomernian", "Szczecin", "1999-01-11"),
-                mockChampionship(302L, "WLU2022", "Warszawa", "1999-01-10"),
-                mockChampionship(303L, "WLU2023", "Warszawa", "1999-01-14"),
-                mockChampionship(304L, "Snejk", "Warszawa Bemowo", "1999-01-12"),
-                mockChampionship(305L, "Puffiaki", "Poznań", "1999-01-18")
+                mockChampionship(301L, "Pomernian", "Szczecin", DATE_FORMAT.parse("1999-01-11")),
+                mockChampionship(302L, "WLU2022", "Warszawa", DATE_FORMAT.parse("1999-01-10")),
+                mockChampionship(303L, "WLU2023", "Warszawa", DATE_FORMAT.parse("1999-01-14")),
+                mockChampionship(304L, "Snejk", "Warszawa Bemowo", DATE_FORMAT.parse("1999-01-12")),
+                mockChampionship(305L, "Puffiaki", "Poznań", DATE_FORMAT.parse("1999-01-18"))
         );
         when(championshipRepository.findAll()).thenReturn(mockedChampionships);
 
@@ -87,15 +92,15 @@ class ChampionshipServiceTest {
 
     @Test
     @MockitoSettings(strictness = Strictness.LENIENT)
-    void shouldGetChampionshipsWithoutFiltering() {
+    void shouldGetChampionshipsWithoutFiltering() throws ParseException {
 
         // given
         List<ChampionshipEntity> mockedChampionships = List.of(
-                mockChampionship(301L, "Pomernian", "Szczecin", "1999-01-11"),
-                mockChampionship(302L, "WLU2022", "Warszawa", "1999-01-10"),
-                mockChampionship(303L, "WLU2023", "Warszawa", "1999-01-14"),
-                mockChampionship(304L, "Snejk", "Warszawa Bemowo", "1999-01-12"),
-                mockChampionship(305L, "Puffiaki", "Poznań", "1999-01-18")
+                mockChampionship(301L, "Pomernian", "Szczecin", DATE_FORMAT.parse("1999-01-11")),
+                mockChampionship(302L, "WLU2022", "Warszawa", DATE_FORMAT.parse("1999-01-10")),
+                mockChampionship(303L, "WLU2023", "Warszawa", DATE_FORMAT.parse("1999-01-14")),
+                mockChampionship(304L, "Snejk", "Warszawa Bemowo", DATE_FORMAT.parse("1999-01-12")),
+                mockChampionship(305L, "Puffiaki", "Poznań", DATE_FORMAT.parse("1999-01-18"))
         );
         when(championshipRepository.findAll()).thenReturn(mockedChampionships);
 
@@ -106,7 +111,7 @@ class ChampionshipServiceTest {
         assertThat(championshipsInWarsaw).hasSize(5);
     }
 
-    private ChampionshipEntity mockChampionship(long id, String name, String city, String date) {
+    private ChampionshipEntity mockChampionship(long id, String name, String city, Date date) {
         ChampionshipEntity mockedChampionship = mock(ChampionshipEntity.class);
         when(mockedChampionship.getId()).thenReturn(id);
         when(mockedChampionship.getName()).thenReturn(name);
