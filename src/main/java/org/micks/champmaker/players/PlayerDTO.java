@@ -2,6 +2,7 @@ package org.micks.champmaker.players;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 public class PlayerDTO {
 
@@ -16,12 +17,12 @@ public class PlayerDTO {
     private Long shirtNumber;
 
     @NotNull
-    private String birthDate;
+    private Date birthDate;
 
     public PlayerDTO() {
     }
 
-    public PlayerDTO(Long id, Long teamId, String name, Long shirtNumber, String birthDate) {
+    public PlayerDTO(Long id, Long teamId, String name, Long shirtNumber, Date birthDate) {
         this.id = id;
         this.teamId = teamId;
         this.name = name;
@@ -45,7 +46,7 @@ public class PlayerDTO {
         return shirtNumber;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 }

@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,8 +30,10 @@ class ChampionshipServiceTest {
     @Test
     void shouldReturnChampionship() throws EntityNotFoundException {
 
+        Date mockedDate = new Date();
+
         // given
-        Optional<ChampionshipEntity> expectedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", "15 August"));
+        Optional<ChampionshipEntity> expectedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", mockedDate));
         when(championshipRepository.findById(322L)).thenReturn(expectedChampionship);
 
         // when
@@ -39,7 +42,7 @@ class ChampionshipServiceTest {
         // then
         assertThat(championship.getCity()).isEqualTo("Szczecin");
         assertThat(championship.getName()).isEqualTo("Pomeranian");
-        assertThat(championship.getDate()).isEqualTo("15 August");
+        assertThat(championship.getDate()).isEqualTo(mockedDate);
     }
 
     @Test

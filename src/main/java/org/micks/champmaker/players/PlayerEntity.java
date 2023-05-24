@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 @Table(name = "player")
 @Entity
@@ -19,7 +22,9 @@ public class PlayerEntity {
 
     private String name;
     private Long shirtNumber;
-    private String birthDate;
+
+    @Temporal(TemporalType.DATE)
+    private Date birthDate;
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
@@ -28,7 +33,7 @@ public class PlayerEntity {
     public PlayerEntity() {
     }
 
-    public PlayerEntity(String name, Long shirtNumber, String birthDate, TeamEntity team) {
+    public PlayerEntity(String name, Long shirtNumber, Date birthDate, TeamEntity team) {
         this.name = name;
         this.shirtNumber = shirtNumber;
         this.birthDate = birthDate;
@@ -47,7 +52,7 @@ public class PlayerEntity {
         return shirtNumber;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
