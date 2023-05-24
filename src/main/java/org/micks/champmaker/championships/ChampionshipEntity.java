@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 @Table(name = "championship")
 @Entity
@@ -15,12 +18,14 @@ public class ChampionshipEntity {
 
     private String name;
     private String city;
-    private String date;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     public ChampionshipEntity() {
     }
 
-    public ChampionshipEntity(String name, String city, String date) {
+    public ChampionshipEntity(String name, String city, Date date) {
         this.name = name;
         this.city = city;
         this.date = date;
@@ -46,11 +51,11 @@ public class ChampionshipEntity {
         this.city = city;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

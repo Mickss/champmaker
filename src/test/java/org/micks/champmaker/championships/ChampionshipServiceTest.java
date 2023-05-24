@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +34,10 @@ class ChampionshipServiceTest {
     @Test
     void shouldReturnChampionship() throws EntityNotFoundException {
 
+        Date mockedDate = new Date();
+
         // given
-        Optional<ChampionshipEntity> expectedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", "15 August"));
+        Optional<ChampionshipEntity> expectedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", mockedDate));
         when(championshipRepository.findById(322L)).thenReturn(expectedChampionship);
 
         // when
@@ -43,7 +46,7 @@ class ChampionshipServiceTest {
         // then
         assertThat(championship.getCity()).isEqualTo("Szczecin");
         assertThat(championship.getName()).isEqualTo("Pomeranian");
-        assertThat(championship.getDate()).isEqualTo("15 August");
+        assertThat(championship.getDate()).isEqualTo(mockedDate);
     }
 
     @Test
