@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.meals.MealDTO;
 import org.micks.champmaker.meals.MealService;
-import org.micks.champmaker.register.RegisterTeamDTO;
 import org.micks.champmaker.register.RegisterPlayerDTO;
 import org.micks.champmaker.register.RegisterService;
+import org.micks.champmaker.register.RegisterTeamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,7 +48,7 @@ public class ChampionshipController {
     }
 
     @PutMapping(value = "{champId}/register-player", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void registerPlayerToChampionship(@PathVariable long champId, @RequestBody RegisterPlayerDTO registerPlayerDTO) {
+    public void registerPlayerToChampionship(@PathVariable long champId, @RequestBody RegisterPlayerDTO registerPlayerDTO) throws EntityNotFoundException {
         registerService.registerPlayer(champId, registerPlayerDTO);
     }
 
