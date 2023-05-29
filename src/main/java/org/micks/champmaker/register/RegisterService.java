@@ -1,9 +1,17 @@
 package org.micks.champmaker.register;
 
+import org.micks.champmaker.championships.ChampionshipEntity;
+import org.micks.champmaker.championships.ChampionshipRepository;
+import org.micks.champmaker.exceptions.EntityNotFoundException;
+import org.micks.champmaker.exceptions.PlayerAgeNotValidException;
+import org.micks.champmaker.players.PlayerDTO;
 import org.micks.champmaker.players.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -19,6 +27,9 @@ public class RegisterService {
 
     @Autowired
     private PlayerService playerService;
+
+    @Autowired
+    private ChampionshipRepository championshipRepository;
 
     public void registerTeamToChampionship(Long champId, RegisterTeamDTO registerTeamDTO) {
         RegisterTeamEntity registerTeamEntity = new RegisterTeamEntity(champId, registerTeamDTO.getTeamId(), registerTeamDTO.getRegistrationDate());
@@ -41,8 +52,25 @@ public class RegisterService {
                 .map(RegisterTeamEntity::getTeamId).collect(toList());
     }
 
-    public void registerPlayer(long champId, RegisterPlayerDTO registerPlayerDTO) {
+    public void registerPlayer(long champId, RegisterPlayerDTO registerPlayerDTO) throws EntityNotFoundException {
+        boolean validPlayerAge = validatePlayerAge(champId, registerPlayerDTO);
+        if (!validPlayerAge) {
+            throw new PlayerAgeNotValidException("Age must be over 18 when attending tournament " + registerPlayerDTO.getPlayerId());
+        }
         RegisterPlayerEntity registerPlayerEntity = new RegisterPlayerEntity(champId, registerPlayerDTO.getPlayerId(), registerPlayerDTO.getMealId());
         registerPlayerRepository.save(registerPlayerEntity);
+    }
+
+    private boolean validatePlayerAge(long champId, RegisterPlayerDTO registerPlayerDTO) throws EntityNotFoundException {
+        Long playerId = registerPlayerDTO.getPlayerId();
+        PlayerDTO player = playerService.getPlayer(playerId);
+        Date birthDate = new Date(player.getBirthDate().getTime());
+        LocalDate playerBirthDateLocal = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        ChampionshipEntity championshipEntity = championshipRepository.findById(champId).orElseThrow();
+        Date champDate = new Date(championshipEntity.getDate().getTime());
+        LocalDate champDateLocal = champDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        return playerBirthDateLocal.plusYears(18).isBefore(champDateLocal);
     }
 }
