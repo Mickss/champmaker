@@ -77,7 +77,7 @@ class RegisterServiceTest {
     }
 
     @Test
-    void checkAgeOfMajorityEqualThanEighteen() throws EntityNotFoundException, ParseException {
+    void checkAgeOfMajorityEqualToEighteen() throws EntityNotFoundException, ParseException {
 
         //given
         long champId = 303;
@@ -89,9 +89,9 @@ class RegisterServiceTest {
         RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(403, 503);
 
         //when
-        Throwable throwable = catchThrowable(() -> registerService.registerPlayer(champId, registerPlayerDTO));
+        registerService.registerPlayer(champId, registerPlayerDTO);
 
         //then
-        assertThat(throwable).isInstanceOf(PlayerAgeNotValidException.class);
+        // no exception occurs
     }
 }
