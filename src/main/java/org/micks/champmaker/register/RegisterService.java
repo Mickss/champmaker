@@ -71,6 +71,6 @@ public class RegisterService {
         Date champDate = new Date(championshipEntity.getDate().getTime());
         LocalDate champDateLocal = champDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        return !playerBirthDateLocal.plusYears(18).isAfter(champDateLocal);
+        return !playerBirthDateLocal.plusYears(18).isAfter(champDateLocal) || registerPlayerDTO.isParentalApproval();
     }
 }
