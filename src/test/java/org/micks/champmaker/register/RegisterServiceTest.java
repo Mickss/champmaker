@@ -94,4 +94,23 @@ class RegisterServiceTest {
         //then
         // no exception occurs
     }
+
+    @Test
+    void checkAgeOfMajorityLessThanEighteenWithParentalApproval() throws EntityNotFoundException, ParseException {
+
+        //given
+        long champId = 304;
+
+        PlayerDTO mockedPlayerDTO = new PlayerDTO(404L, 804L, "Krzyś", 55L, DATE_FORMAT.parse("2010-11-16"));
+        when(playerService.getPlayer(404)).thenReturn(mockedPlayerDTO);
+        Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-12-15")));
+        when(championshipRepository.findById(304L)).thenReturn(mockedChampionshipId);
+        RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(404L, 504L, true);
+
+        //when
+        registerService.registerPlayer(champId, registerPlayerDTO);
+
+        //then
+        // no exception occurs
+    }
 }
