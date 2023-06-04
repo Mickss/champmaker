@@ -21,14 +21,16 @@ public class ChampionshipEntity {
 
     @Temporal(TemporalType.DATE)
     private Date date;
+    private ChampionshipStatus status;
 
     public ChampionshipEntity() {
     }
 
-    public ChampionshipEntity(String name, String city, Date date) {
+    public ChampionshipEntity(String name, String city, Date date, ChampionshipStatus status) {
         this.name = name;
         this.city = city;
         this.date = date;
+        this.status = status;
     }
 
     public Long getId() {
@@ -57,5 +59,13 @@ public class ChampionshipEntity {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public ChampionshipStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ChampionshipStatus status) {
+        this.status = status;
     }
 }

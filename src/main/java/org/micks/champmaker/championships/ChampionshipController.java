@@ -73,6 +73,11 @@ public class ChampionshipController {
         championshipService.editChampionship(champId, championshipDTO);
     }
 
+    @PutMapping(value = "/{champId}/start-registration")
+    public void startRegistration(@PathVariable long champId) {
+        championshipService.startRegistration(champId);
+    }
+
     @PutMapping(value = "/{champId}/shuffle-teams")
     public void shuffleTeams(@PathVariable long champId) {
         championshipService.shuffleTeams(champId);
