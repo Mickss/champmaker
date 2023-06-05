@@ -87,6 +87,13 @@ public class ChampionshipService {
         }
     }
 
-    public void startRegistration(long champId) {
+    public void startRegistration(long champId) throws EntityNotFoundException {
+        Optional<ChampionshipEntity> registrationById = championshipRepository.findById(champId);
+        if (registrationById.isEmpty()) {
+            throw new EntityNotFoundException("Cannot find champ by Id: " + champId);
+        }
+        ChampionshipEntity championshipEntity = registrationById.get();
+        championshipEntity.setStatus(ChampionshipStatus.REGISTRATION);
+        championshipRepository.save(championshipEntity);
     }
 }
