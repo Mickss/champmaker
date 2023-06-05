@@ -1,9 +1,9 @@
 package org.micks.champmaker.championships;
 
 import org.micks.champmaker.exceptions.EntityNotFoundException;
-import org.micks.champmaker.register.RegisterTeamEntity;
 import org.micks.champmaker.register.RegisterRepository;
 import org.micks.champmaker.register.RegisterService;
+import org.micks.champmaker.register.RegisterTeamEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +47,7 @@ public class ChampionshipService {
     }
 
     public void createChampionship(ChampionshipDTO championshipDTO) {
-        ChampionshipEntity championshipEntity = new ChampionshipEntity(championshipDTO.getName(), championshipDTO.getCity(), championshipDTO.getDate());
+        ChampionshipEntity championshipEntity = new ChampionshipEntity(championshipDTO.getName(), championshipDTO.getCity(), championshipDTO.getDate(), ChampionshipStatus.DRAFT);
         championshipRepository.save(championshipEntity);
     }
 
@@ -85,5 +85,15 @@ public class ChampionshipService {
             registeredTeamsGroup.setChampGroup(group);
             registerRepository.save(registeredTeamsGroup);
         }
+    }
+
+    public void startRegistration(long champId) throws EntityNotFoundException {
+        Optional<ChampionshipEntity> registrationById = championshipRepository.findById(champId);
+        if (registrationById.isEmpty()) {
+            throw new EntityNotFoundException("Cannot find champ by Id: " + champId);
+        }
+        ChampionshipEntity championshipEntity = registrationById.get();
+        championshipEntity.setStatus(ChampionshipStatus.REGISTRATION);
+        championshipRepository.save(championshipEntity);
     }
 }
