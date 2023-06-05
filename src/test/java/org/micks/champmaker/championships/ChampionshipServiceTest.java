@@ -42,7 +42,7 @@ class ChampionshipServiceTest {
         Date mockedDate = new Date();
 
         // given
-        Optional<ChampionshipEntity> expectedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", mockedDate));
+        Optional<ChampionshipEntity> expectedChampionship = Optional.of(new ChampionshipEntity("Pomeranian", "Szczecin", mockedDate, ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(322L)).thenReturn(expectedChampionship);
 
         // when
