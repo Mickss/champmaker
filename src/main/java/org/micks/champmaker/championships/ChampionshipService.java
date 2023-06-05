@@ -88,11 +88,14 @@ public class ChampionshipService {
     }
 
     public void startRegistration(long champId) throws EntityNotFoundException {
-        Optional<ChampionshipEntity> registrationById = championshipRepository.findById(champId);
-        if (registrationById.isEmpty()) {
+        Optional<ChampionshipEntity> optionalChampionship = championshipRepository.findById(champId);
+        if (optionalChampionship.isEmpty()) {
             throw new EntityNotFoundException("Cannot find champ by Id: " + champId);
         }
-        ChampionshipEntity championshipEntity = registrationById.get();
+        ChampionshipEntity championshipEntity = optionalChampionship.get();
+        if (!championshipEntity.getStatus().equals(ChampionshipStatus.DRAFT)) {
+            throw new IllegalArgumentException("Wrong status of the tournament " + champId);
+        }
         championshipEntity.setStatus(ChampionshipStatus.REGISTRATION);
         championshipRepository.save(championshipEntity);
     }
