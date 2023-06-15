@@ -74,7 +74,7 @@ public class ChampionshipController {
     }
 
     @PutMapping(value = "/{champId}/start-registration")
-    public void startRegistration(@PathVariable long champId) throws EntityNotFoundException{
+    public void startRegistration(@PathVariable long champId) throws EntityNotFoundException {
         championshipService.startRegistration(champId);
     }
 

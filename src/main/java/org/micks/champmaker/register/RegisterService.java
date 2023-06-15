@@ -2,6 +2,7 @@ package org.micks.champmaker.register;
 
 import org.micks.champmaker.championships.ChampionshipEntity;
 import org.micks.champmaker.championships.ChampionshipRepository;
+import org.micks.champmaker.championships.ChampionshipStatus;
 import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.exceptions.PlayerAgeNotValidException;
 import org.micks.champmaker.players.PlayerDTO;
@@ -31,8 +32,13 @@ public class RegisterService {
     @Autowired
     private ChampionshipRepository championshipRepository;
 
-    public void registerTeamToChampionship(Long champId, RegisterTeamDTO registerTeamDTO) {
+    public void registerTeamToChampionship(Long champId, RegisterTeamDTO registerTeamDTO) throws IllegalStateException {
         RegisterTeamEntity registerTeamEntity = new RegisterTeamEntity(champId, registerTeamDTO.getTeamId(), registerTeamDTO.getRegistrationDate());
+        ChampionshipEntity championshipRepositoryById = championshipRepository.getById(champId);
+        if (!championshipRepositoryById.getStatus().equals(ChampionshipStatus.REGISTRATION)) {
+            throw new IllegalStateException("Wrong status of the tournament " + champId);
+        }
+        registerTeamEntity.setStatus(ChampionshipStatus.IN_PROGRESS);
         registerRepository.save(registerTeamEntity);
     }
 

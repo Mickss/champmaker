@@ -3,6 +3,7 @@ package org.micks.champmaker.register;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.micks.champmaker.championships.ChampionshipStatus;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class RegisterTeamEntity {
     private Long teamId;
     private String registrationDate;
     private String champGroup;
+    private ChampionshipStatus status;
 
     public RegisterTeamEntity(Long champId, Long teamId, String registrationDate) {
         this.champId = champId;
