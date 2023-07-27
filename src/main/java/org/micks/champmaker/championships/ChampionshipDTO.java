@@ -1,5 +1,7 @@
 package org.micks.champmaker.championships;
 
+import org.micks.champmaker.teams.TeamDTO;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -14,12 +16,12 @@ public class ChampionshipDTO {
     @NotNull
     private String city;
     private Date date;
-    private List<Long> registeredTeams;
+    private List<TeamDTO> registeredTeams;
 
     public ChampionshipDTO() {
     }
 
-    public ChampionshipDTO(Long id, String name, String city, Date date, List<Long> registeredTeams) {
+    public ChampionshipDTO(Long id, String name, String city, Date date, List<TeamDTO> registeredTeams) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -43,7 +45,7 @@ public class ChampionshipDTO {
         return date;
     }
 
-    public List<Long> getRegisteredTeams() {
+    public List<TeamDTO> getRegisteredTeams() {
         return registeredTeams;
     }
 }

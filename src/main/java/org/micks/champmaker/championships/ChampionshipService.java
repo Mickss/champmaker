@@ -4,6 +4,7 @@ import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.register.RegisterRepository;
 import org.micks.champmaker.register.RegisterService;
 import org.micks.champmaker.register.RegisterTeamEntity;
+import org.micks.champmaker.teams.TeamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class ChampionshipService {
         Optional<ChampionshipEntity> optionalChampionship = championshipRepository.findById(champId);
         if (optionalChampionship.isPresent()) {
             ChampionshipEntity championshipEntity = optionalChampionship.get();
-            List<Long> registeredTeams = registerService.getRegisteredTeams(champId);
+            List<TeamDTO> registeredTeams = registerService.getRegisteredTeams(champId);
             return new ChampionshipDTO(championshipEntity.getId(), championshipEntity.getName(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
         } else {
             throw new EntityNotFoundException("Can not find Championship with Id: " + champId);
@@ -40,7 +41,7 @@ public class ChampionshipService {
         return championshipList.stream()
                 .filter(championshipEntity -> city == null || championshipEntity.getCity().contains(city))
                 .map(championshipEntity -> {
-                    List<Long> registeredTeams = registerService.getRegisteredTeams(championshipEntity.getId());
+                    List<TeamDTO> registeredTeams = registerService.getRegisteredTeams(championshipEntity.getId());
                     return new ChampionshipDTO(championshipEntity.getId(), championshipEntity.getName(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
                 })
                 .collect(Collectors.toList());

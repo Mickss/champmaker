@@ -7,6 +7,8 @@ import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.exceptions.PlayerAgeNotValidException;
 import org.micks.champmaker.players.PlayerDTO;
 import org.micks.champmaker.players.PlayerService;
+import org.micks.champmaker.teams.TeamDTO;
+import org.micks.champmaker.teams.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,9 @@ public class RegisterService {
     @Autowired
     private ChampionshipRepository championshipRepository;
 
+    @Autowired
+    private TeamService teamService;
+
     public void registerTeamToChampionship(Long champId, RegisterTeamDTO registerTeamDTO) throws IllegalStateException {
         RegisterTeamEntity registerTeamEntity = new RegisterTeamEntity(champId, registerTeamDTO.getTeamId(), registerTeamDTO.getRegistrationDate());
         ChampionshipEntity championshipRepositoryById = championshipRepository.getById(champId);
@@ -52,10 +57,18 @@ public class RegisterService {
                 .collect(toList());
     }
 
-    public List<Long> getRegisteredTeams(long champId) {
+    public List<TeamDTO> getRegisteredTeams(long champId) {
         List<RegisterTeamEntity> registerEntities = registerRepository.findByChampId(champId);
         return registerEntities.stream()
-                .map(RegisterTeamEntity::getTeamId).collect(toList());
+                .map(registerTeamEntity -> {
+                    TeamDTO teamDTO;
+                    try {
+                        teamDTO = teamService.getTeam(registerTeamEntity.getTeamId());
+                    } catch (EntityNotFoundException e) {
+                        throw new IllegalStateException("Team not found exception for team ID: " + registerTeamEntity.getTeamId(), e);
+                    }
+                    return new TeamDTO(registerTeamEntity.getTeamId(), teamDTO.getName());
+                }).collect(toList());
     }
 
     public void registerPlayer(long champId, RegisterPlayerDTO registerPlayerDTO) throws EntityNotFoundException {
