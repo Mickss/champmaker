@@ -47,13 +47,10 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
-    public List<Long> getPlayersIds(long teamId) {
+    public List<PlayerEntity> getPlayersForTeam(long teamId) {
         List<PlayerEntity> allPlayers = playerRepository.findAll();
-        List<PlayerEntity> playersForTeam = allPlayers.stream()
+        return allPlayers.stream()
                 .filter(playerEntity -> playerEntity.getTeam().getId() == teamId)
                 .toList();
-        return playersForTeam.stream()
-                .map(PlayerEntity::getId)
-                .collect(Collectors.toList());
     }
 }

@@ -59,7 +59,7 @@ public class ChampionshipController {
     }
 
     @GetMapping("/{champId}/registered-players")
-    public List<Long> getRegisteredPlayers(@PathVariable long champId, @RequestParam long teamId) {
+    public List<RegisterPlayerDTO> getRegisteredPlayers(@PathVariable long champId, @RequestParam long teamId) {
         return registerService.getRegisteredPlayers(champId, teamId);
     }
 
