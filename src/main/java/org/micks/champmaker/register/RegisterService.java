@@ -6,6 +6,7 @@ import org.micks.champmaker.championships.ChampionshipStatus;
 import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.exceptions.PlayerAgeNotValidException;
 import org.micks.champmaker.players.PlayerDTO;
+import org.micks.champmaker.players.PlayerEntity;
 import org.micks.champmaker.players.PlayerService;
 import org.micks.champmaker.teams.TeamDTO;
 import org.micks.champmaker.teams.TeamService;
@@ -47,14 +48,22 @@ public class RegisterService {
         registerRepository.save(registerTeamEntity);
     }
 
-    public List<Long> getRegisteredPlayers(long champId, long teamId) {
+    public List<RegisterPlayerDTO> getRegisteredPlayers(long champId, long teamId) {
         List<RegisterPlayerEntity> registeredPlayers = registerPlayerRepository.findByChampId(champId);
         List<Long> registeredPlayersIds = registeredPlayers.stream()
                 .map(RegisterPlayerEntity::getPlayerId)
                 .collect(toList());
-        return playerService.getPlayersIds(teamId).stream()
-                .filter(registeredPlayersIds::contains)
+        List<PlayerEntity> registeredPlayersIdsForTeam = playerService.getPlayersForTeam(teamId).stream()
+                .filter(pe -> registeredPlayersIds.contains(pe.getId()))
                 .collect(toList());
+        return registeredPlayersIdsForTeam.stream().map(playerEntity -> {
+            RegisterPlayerEntity registerPlayer = registeredPlayers.stream()
+                    .filter(registerPlayerEntity -> registerPlayerEntity.getPlayerId().equals(playerEntity.getId()))
+                    .findFirst()
+                    .orElseThrow();
+            PlayerDTO playerInfo = new PlayerDTO(playerEntity.getId(), playerEntity.getTeam().getId(), playerEntity.getName(), playerEntity.getShirtNumber(), playerEntity.getBirthDate());
+            return new RegisterPlayerDTO(playerEntity.getId(), registerPlayer.getMealId(), playerInfo);
+        }).collect(toList());
     }
 
     public List<TeamDTO> getRegisteredTeams(long champId) {

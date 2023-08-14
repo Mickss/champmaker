@@ -49,7 +49,7 @@ class RegisterServiceTest {
         when(playerService.getPlayer(401)).thenReturn(mockedPlayerDTO);
         Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-12-15"), ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(301L)).thenReturn(mockedChampionshipId);
-        RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(401, 501);
+        RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(401, 501L, null);
 
         //when
         Throwable throwable = catchThrowable(() -> registerService.registerPlayer(champId, registerPlayerDTO));
@@ -68,7 +68,7 @@ class RegisterServiceTest {
         when(playerService.getPlayer(402)).thenReturn(mockedPlayerDTO);
         Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-12-15"), ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(302L)).thenReturn(mockedChampionshipId);
-        RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(402, 502);
+        RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(402, 502L, null);
 
         //when
         registerService.registerPlayer(champId, registerPlayerDTO);
@@ -87,7 +87,7 @@ class RegisterServiceTest {
         when(playerService.getPlayer(403)).thenReturn(mockedPlayerDTO);
         Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-10-10"), ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(303L)).thenReturn(mockedChampionshipId);
-        RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(403, 503);
+        RegisterPlayerDTO registerPlayerDTO = new RegisterPlayerDTO(403, 503L, null);
 
         //when
         registerService.registerPlayer(champId, registerPlayerDTO);
