@@ -14,7 +14,7 @@ public class PlayerDTO {
     @Size(min = 2)
     private String name;
 
-    private Long shirtNumber;
+    private int shirtNumber;
 
     @NotNull
     private Date birthDate;
@@ -22,7 +22,7 @@ public class PlayerDTO {
     public PlayerDTO() {
     }
 
-    public PlayerDTO(Long id, Long teamId, String name, Long shirtNumber, Date birthDate) {
+    public PlayerDTO(Long id, Long teamId, String name, int shirtNumber, Date birthDate) {
         this.id = id;
         this.teamId = teamId;
         this.name = name;
@@ -42,7 +42,7 @@ public class PlayerDTO {
         return name;
     }
 
-    public Long getShirtNumber() {
+    public int getShirtNumber() {
         return shirtNumber;
     }
 

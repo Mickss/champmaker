@@ -1,9 +1,9 @@
 package org.micks.champmaker.championships;
 
 import org.micks.champmaker.exceptions.EntityNotFoundException;
-import org.micks.champmaker.register.RegisterRepository;
+import org.micks.champmaker.register.RegisteredTeamRepository;
 import org.micks.champmaker.register.RegisterService;
-import org.micks.champmaker.register.RegisterTeamEntity;
+import org.micks.champmaker.register.RegisteredTeamEntity;
 import org.micks.champmaker.teams.TeamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class ChampionshipService {
     private RegisterService registerService;
 
     @Autowired
-    private RegisterRepository registerRepository;
+    private RegisteredTeamRepository registeredTeamRepository;
 
     public ChampionshipDTO getChampionship(long champId) throws EntityNotFoundException {
         Optional<ChampionshipEntity> optionalChampionship = championshipRepository.findById(champId);
@@ -66,12 +66,12 @@ public class ChampionshipService {
     }
 
     public void shuffleTeams(long champId) {
-        List<RegisterTeamEntity> registeredTeamList = registerRepository.findByChampId(champId);
+        List<RegisteredTeamEntity> registeredTeamList = registeredTeamRepository.findByChampId(champId);
         Random random = new Random();
         int counterA = 0;
         int counterB = 0;
 
-        for (RegisterTeamEntity registeredTeamsGroup : registeredTeamList) {
+        for (RegisteredTeamEntity registeredTeamsGroup : registeredTeamList) {
             double randomNumber = random.nextInt(100);
             String group;
             int countedTeams = registeredTeamList.size();
@@ -84,7 +84,7 @@ public class ChampionshipService {
                 counterB++;
             }
             registeredTeamsGroup.setChampGroup(group);
-            registerRepository.save(registeredTeamsGroup);
+            registeredTeamRepository.save(registeredTeamsGroup);
         }
     }
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RegisterRepository extends JpaRepository<RegisterTeamEntity, Long> {
+public interface RegisteredTeamRepository extends JpaRepository<RegisteredTeamEntity, Long> {
 
-    List<RegisterTeamEntity> findByChampId(long champId);
+    List<RegisteredTeamEntity> findByChampId(long champId);
 }

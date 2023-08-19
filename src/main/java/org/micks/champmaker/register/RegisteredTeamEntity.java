@@ -11,12 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "Register")
+@Table(name = "registered_team")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class RegisterTeamEntity {
+public class RegisteredTeamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,9 +25,8 @@ public class RegisterTeamEntity {
     private Long teamId;
     private String registrationDate;
     private String champGroup;
-    private ChampionshipStatus status;
 
-    public RegisterTeamEntity(Long champId, Long teamId, String registrationDate) {
+    public RegisteredTeamEntity(Long champId, Long teamId, String registrationDate) {
         this.champId = champId;
         this.teamId = teamId;
         this.registrationDate = registrationDate;
