@@ -1,5 +1,6 @@
 package org.micks.champmaker.championships;
 
+import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.micks.champmaker.register.RegisteredTeamRepository;
 import org.micks.champmaker.register.RegisterService;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ChampionshipService {
 
@@ -66,6 +68,7 @@ public class ChampionshipService {
     }
 
     public void shuffleTeams(long champId) {
+        log.info("Shuffling teams for championship: {}", champId);
         List<RegisteredTeamEntity> registeredTeamList = registeredTeamRepository.findByChampId(champId);
         Random random = new Random();
         int counterA = 0;
