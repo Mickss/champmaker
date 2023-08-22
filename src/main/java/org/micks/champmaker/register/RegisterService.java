@@ -24,7 +24,7 @@ import static java.util.stream.Collectors.toList;
 public class RegisterService {
 
     @Autowired
-    private RegisterRepository registerRepository;
+    private RegisteredTeamRepository registeredTeamRepository;
 
     @Autowired
     private RegisterPlayerRepository registerPlayerRepository;
@@ -39,23 +39,22 @@ public class RegisterService {
     private TeamService teamService;
 
     public void registerTeamToChampionship(Long champId, RegisterTeamDTO registerTeamDTO) throws IllegalStateException {
-        RegisterTeamEntity registerTeamEntity = new RegisterTeamEntity(champId, registerTeamDTO.getTeamId(), registerTeamDTO.getRegistrationDate());
-        ChampionshipEntity championshipRepositoryById = championshipRepository.getById(champId);
-        if (!championshipRepositoryById.getStatus().equals(ChampionshipStatus.REGISTRATION)) {
+        RegisteredTeamEntity registeredTeamEntity = new RegisteredTeamEntity(champId, registerTeamDTO.getTeamId(), registerTeamDTO.getRegistrationDate());
+        ChampionshipEntity championshipEntity = championshipRepository.getById(champId);
+        if (!championshipEntity.getStatus().equals(ChampionshipStatus.REGISTRATION)) {
             throw new IllegalStateException("Wrong status of the tournament " + champId);
         }
-        registerTeamEntity.setStatus(ChampionshipStatus.IN_PROGRESS);
-        registerRepository.save(registerTeamEntity);
+        registeredTeamRepository.save(registeredTeamEntity);
     }
 
     public List<RegisterPlayerDTO> getRegisteredPlayers(long champId, long teamId) {
         List<RegisterPlayerEntity> registeredPlayers = registerPlayerRepository.findByChampId(champId);
         List<Long> registeredPlayersIds = registeredPlayers.stream()
                 .map(RegisterPlayerEntity::getPlayerId)
-                .collect(toList());
+                .toList();
         List<PlayerEntity> registeredPlayersIdsForTeam = playerService.getPlayersForTeam(teamId).stream()
                 .filter(pe -> registeredPlayersIds.contains(pe.getId()))
-                .collect(toList());
+                .toList();
         return registeredPlayersIdsForTeam.stream().map(playerEntity -> {
             RegisterPlayerEntity registerPlayer = registeredPlayers.stream()
                     .filter(registerPlayerEntity -> registerPlayerEntity.getPlayerId().equals(playerEntity.getId()))
@@ -67,16 +66,16 @@ public class RegisterService {
     }
 
     public List<TeamDTO> getRegisteredTeams(long champId) {
-        List<RegisterTeamEntity> registerEntities = registerRepository.findByChampId(champId);
+        List<RegisteredTeamEntity> registerEntities = registeredTeamRepository.findByChampId(champId);
         return registerEntities.stream()
-                .map(registerTeamEntity -> {
+                .map(registeredTeamEntity -> {
                     TeamDTO teamDTO;
                     try {
-                        teamDTO = teamService.getTeam(registerTeamEntity.getTeamId());
+                        teamDTO = teamService.getTeam(registeredTeamEntity.getTeamId());
                     } catch (EntityNotFoundException e) {
-                        throw new IllegalStateException("Team not found exception for team ID: " + registerTeamEntity.getTeamId(), e);
+                        throw new IllegalStateException("Team not found exception for team ID: " + registeredTeamEntity.getTeamId(), e);
                     }
-                    return new TeamDTO(registerTeamEntity.getTeamId(), teamDTO.getName());
+                    return new TeamDTO(registeredTeamEntity.getTeamId(), teamDTO.getName());
                 }).collect(toList());
     }
 

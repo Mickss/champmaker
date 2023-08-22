@@ -45,7 +45,7 @@ class RegisterServiceTest {
         //given
         long champId = 301;
 
-        PlayerDTO mockedPlayerDTO = new PlayerDTO(401L, 801L, "Kazio", 99L, DATE_FORMAT.parse("2005-12-16"));
+        PlayerDTO mockedPlayerDTO = new PlayerDTO(401L, 801L, "Kazio", 99, DATE_FORMAT.parse("2005-12-16"));
         when(playerService.getPlayer(401)).thenReturn(mockedPlayerDTO);
         Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-12-15"), ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(301L)).thenReturn(mockedChampionshipId);
@@ -64,7 +64,7 @@ class RegisterServiceTest {
         //given
         long champId = 302;
 
-        PlayerDTO mockedPlayerDTO = new PlayerDTO(402L, 802L, "Mieszko", 98L, DATE_FORMAT.parse("1990-03-05"));
+        PlayerDTO mockedPlayerDTO = new PlayerDTO(402L, 802L, "Mieszko", 98, DATE_FORMAT.parse("1990-03-05"));
         when(playerService.getPlayer(402)).thenReturn(mockedPlayerDTO);
         Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-12-15"), ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(302L)).thenReturn(mockedChampionshipId);
@@ -83,7 +83,7 @@ class RegisterServiceTest {
         //given
         long champId = 303;
 
-        PlayerDTO mockedPlayerDTO = new PlayerDTO(403L, 803L, "Waldemar", 98L, DATE_FORMAT.parse("2005-10-10"));
+        PlayerDTO mockedPlayerDTO = new PlayerDTO(403L, 803L, "Waldemar", 98, DATE_FORMAT.parse("2005-10-10"));
         when(playerService.getPlayer(403)).thenReturn(mockedPlayerDTO);
         Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-10-10"), ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(303L)).thenReturn(mockedChampionshipId);
@@ -102,7 +102,7 @@ class RegisterServiceTest {
         //given
         long champId = 304;
 
-        PlayerDTO mockedPlayerDTO = new PlayerDTO(404L, 804L, "Krzyś", 55L, DATE_FORMAT.parse("2010-11-16"));
+        PlayerDTO mockedPlayerDTO = new PlayerDTO(404L, 804L, "Krzyś", 55, DATE_FORMAT.parse("2010-11-16"));
         when(playerService.getPlayer(404)).thenReturn(mockedPlayerDTO);
         Optional<ChampionshipEntity> mockedChampionshipId = Optional.of(new ChampionshipEntity("PUFF", "Poznań", DATE_FORMAT.parse("2023-12-15"), ChampionshipStatus.DRAFT));
         when(championshipRepository.findById(304L)).thenReturn(mockedChampionshipId);

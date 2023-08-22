@@ -1,6 +1,8 @@
 package org.micks.champmaker.championships;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +23,8 @@ public class ChampionshipEntity {
 
     @Temporal(TemporalType.DATE)
     private Date date;
+
+    @Enumerated(EnumType.STRING)
     private ChampionshipStatus status;
 
     public ChampionshipEntity() {

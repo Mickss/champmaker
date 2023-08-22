@@ -21,7 +21,7 @@ public class PlayerEntity {
     private Long id;
 
     private String name;
-    private Long shirtNumber;
+    private int shirtNumber;
 
     @Temporal(TemporalType.DATE)
     private Date birthDate;
@@ -33,7 +33,7 @@ public class PlayerEntity {
     public PlayerEntity() {
     }
 
-    public PlayerEntity(String name, Long shirtNumber, Date birthDate, TeamEntity team) {
+    public PlayerEntity(String name, int shirtNumber, Date birthDate, TeamEntity team) {
         this.name = name;
         this.shirtNumber = shirtNumber;
         this.birthDate = birthDate;
@@ -48,7 +48,7 @@ public class PlayerEntity {
         return name;
     }
 
-    public Long getShirtNumber() {
+    public int getShirtNumber() {
         return shirtNumber;
     }
 
