@@ -3,6 +3,7 @@ Main repository for champmaker application. It helps organizing sport championsh
 
 Other repos used in the project:
 - https://github.com/Mickss/champmaker-ui
+- https://github.com/Mickss/champmaker-auth
 
 Java and Maven are required to run the application.
 
