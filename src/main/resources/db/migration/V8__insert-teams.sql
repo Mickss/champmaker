@@ -1,0 +1,18 @@
+INSERT INTO champmaker.team(name) VALUES ('Flow Wrocław');
+INSERT INTO champmaker.team(name) VALUES ('RJP Warszawa');
+INSERT INTO champmaker.team(name) VALUES ('Fabrykanci Łódź');
+INSERT INTO champmaker.team(name) VALUES ('Savage Ultimate');
+INSERT INTO champmaker.team(name) VALUES ('KrakUF');
+INSERT INTO champmaker.team(name) VALUES ('Mad Hatters Płock');
+INSERT INTO champmaker.team(name) VALUES ('Pogoń Pyton Warszawa');
+INSERT INTO champmaker.team(name) VALUES ('967 Szczecin');
+INSERT INTO champmaker.team(name) VALUES ('Uwaga Pies');
+INSERT INTO champmaker.team(name) VALUES ('KATO VICE');
+INSERT INTO champmaker.team(name) VALUES ('PUFF Poznań');
+INSERT INTO champmaker.team(name) VALUES ('Albatros Ultimate Szczecin');
+INSERT INTO champmaker.team(name) VALUES ('North Dragons Toruń');
+INSERT INTO champmaker.team(name) VALUES ('042 Ultimate Frisbee Team Łódź');
+INSERT INTO champmaker.team(name) VALUES ('Wrocław Południe');
+INSERT INTO champmaker.team(name) VALUES ('ATRE Indians Czarnków');
+INSERT INTO champmaker.team(name) VALUES ('AKS ZŁY Kosmodysk');
+INSERT INTO champmaker.team(name) VALUES ('Frisbnik Rybnik');

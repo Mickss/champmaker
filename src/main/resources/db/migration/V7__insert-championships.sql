@@ -1,4 +1,4 @@
-INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Pomeranian', 'Szczecin', '10-02-2024', 'REGISTRATION');
-INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Iglo', 'Wrocław', '9-12-2023', 'DRAFT');
-INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Młodzieżowe Mistrzostwa Polski', 'Katowice', '3-09-2023', 'DRAFT');
-INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Sandslash', 'Dąbki', '17-08-2024', 'DRAFT');
+INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Pomeranian', 'Szczecin', '2024-02-10', 'REGISTRATION');
+INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Iglo', 'Wrocław', '2023-12-09', 'DRAFT');
+INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Młodzieżowe Mistrzostwa Polski', 'Katowice', '2023-09-03', 'DRAFT');
+INSERT INTO champmaker.championship(name, city, date, status) VALUES ('Sandslash', 'Dąbki', '2024-08-17', 'DRAFT');
