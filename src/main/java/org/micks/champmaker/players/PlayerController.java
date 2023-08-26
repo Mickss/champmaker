@@ -4,13 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,9 +24,8 @@ public class PlayerController {
     }
 
     @GetMapping
-    public List<PlayerDTO> getPlayers(GetPlayersRequest getPlayersRequest) {
-        log.info("Fetching players for params: {}", getPlayersRequest);
-        return playerService.getPlayers(getPlayersRequest);
+    public List<PlayerDTO> getPlayers(@RequestParam(required = false) Long teamId, @RequestParam(required = false) String name) {
+        return playerService.getPlayers(teamId, name);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

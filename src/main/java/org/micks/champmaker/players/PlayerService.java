@@ -37,12 +37,12 @@ public class PlayerService {
         playerRepository.save(playerEntity);
     }
 
-    public List<PlayerDTO> getPlayers(GetPlayersRequest getPlayersRequest) {
+    public List<PlayerDTO> getPlayers(Long teamId, String name) {
         List<PlayerEntity> playerList = playerRepository.findAll();
         return playerList.stream()
-                .filter(playerEntity -> getPlayersRequest.getTeamId() == null || playerEntity.getTeam().getId().equals(getPlayersRequest.getTeamId()))
-                .filter(playerEntity -> getPlayersRequest.getName() == null
-                        || playerEntity.getName().toLowerCase().contains(getPlayersRequest.getName().toLowerCase()))
+                .filter(playerEntity -> teamId == null || playerEntity.getTeam().getId().equals(teamId))
+                .filter(playerEntity -> name == null
+                        || playerEntity.getName().toLowerCase().contains(name.toLowerCase()))
                 .map(playerEntity -> new PlayerDTO(playerEntity.getId(), playerEntity.getTeam().getId(), playerEntity.getName(), playerEntity.getShirtNumber(), playerEntity.getBirthDate()))
                 .collect(Collectors.toList());
     }
