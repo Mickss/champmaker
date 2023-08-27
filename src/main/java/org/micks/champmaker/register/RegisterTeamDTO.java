@@ -1,13 +1,15 @@
 package org.micks.champmaker.register;
 
+import java.util.Date;
+
 public class RegisterTeamDTO {
     private long teamId;
-    private String registrationDate;
+    private Date registrationDate;
 
     public RegisterTeamDTO() {
     }
 
-    public RegisterTeamDTO(long teamId, String registrationDate) {
+    public RegisterTeamDTO(long teamId, Date registrationDate) {
         this.teamId = teamId;
         this.registrationDate = registrationDate;
     }
@@ -16,7 +18,7 @@ public class RegisterTeamDTO {
         return teamId;
     }
 
-    public String getRegistrationDate() {
+    public Date getRegistrationDate() {
         return registrationDate;
     }
 }

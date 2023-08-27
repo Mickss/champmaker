@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 @Table(name = "registered_team")
 @Entity
@@ -23,10 +26,12 @@ public class RegisteredTeamEntity {
 
     private Long champId;
     private Long teamId;
-    private String registrationDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registrationDate;
     private String champGroup;
 
-    public RegisteredTeamEntity(Long champId, Long teamId, String registrationDate) {
+    public RegisteredTeamEntity(Long champId, Long teamId, Date registrationDate) {
         this.champId = champId;
         this.teamId = teamId;
         this.registrationDate = registrationDate;

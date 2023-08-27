@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "register_player")
+@Table(name = "registered_player")
 @Entity
 @Getter
 @Setter
