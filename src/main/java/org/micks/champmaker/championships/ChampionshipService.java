@@ -2,10 +2,10 @@ package org.micks.champmaker.championships;
 
 import lombok.extern.slf4j.Slf4j;
 import org.micks.champmaker.exceptions.EntityNotFoundException;
-import org.micks.champmaker.register.RegisteredTeamRepository;
 import org.micks.champmaker.register.RegisterService;
+import org.micks.champmaker.register.RegisterTeamDTO;
 import org.micks.champmaker.register.RegisteredTeamEntity;
-import org.micks.champmaker.teams.TeamDTO;
+import org.micks.champmaker.register.RegisteredTeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class ChampionshipService {
         Optional<ChampionshipEntity> optionalChampionship = championshipRepository.findById(champId);
         if (optionalChampionship.isPresent()) {
             ChampionshipEntity championshipEntity = optionalChampionship.get();
-            List<TeamDTO> registeredTeams = registerService.getRegisteredTeams(champId);
+            List<RegisterTeamDTO> registeredTeams = registerService.getRegisteredTeams(champId);
             return new ChampionshipDTO(championshipEntity.getId(), championshipEntity.getName(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
         } else {
             throw new EntityNotFoundException("Can not find Championship with Id: " + champId);
@@ -43,7 +43,7 @@ public class ChampionshipService {
         return championshipList.stream()
                 .filter(championshipEntity -> city == null || championshipEntity.getCity().contains(city))
                 .map(championshipEntity -> {
-                    List<TeamDTO> registeredTeams = registerService.getRegisteredTeams(championshipEntity.getId());
+                    List<RegisterTeamDTO> registeredTeams = registerService.getRegisteredTeams(championshipEntity.getId());
                     return new ChampionshipDTO(championshipEntity.getId(), championshipEntity.getName(), championshipEntity.getCity(), championshipEntity.getDate(), registeredTeams);
                 })
                 .collect(Collectors.toList());

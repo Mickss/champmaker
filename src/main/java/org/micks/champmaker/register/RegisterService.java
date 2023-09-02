@@ -65,7 +65,7 @@ public class RegisterService {
         }).collect(toList());
     }
 
-    public List<TeamDTO> getRegisteredTeams(long champId) {
+    public List<RegisterTeamDTO> getRegisteredTeams(long champId) {
         List<RegisteredTeamEntity> registerEntities = registeredTeamRepository.findByChampId(champId);
         return registerEntities.stream()
                 .map(registeredTeamEntity -> {
@@ -75,7 +75,7 @@ public class RegisterService {
                     } catch (EntityNotFoundException e) {
                         throw new IllegalStateException("Team not found exception for team ID: " + registeredTeamEntity.getTeamId(), e);
                     }
-                    return new TeamDTO(registeredTeamEntity.getTeamId(), teamDTO.getName());
+                    return new RegisterTeamDTO(registeredTeamEntity.getTeamId(), teamDTO.getName(), registeredTeamEntity.getRegistrationDate(), registeredTeamEntity.getChampGroup());
                 }).collect(toList());
     }
 
