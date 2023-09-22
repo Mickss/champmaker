@@ -102,4 +102,9 @@ public class ChampionshipController {
     public MealDTO getMeal(@PathVariable long champId, @PathVariable long mealId) {
         return mealService.getMeal(champId, mealId);
     }
+
+    @PostMapping(value = "/{champId}/schedule")
+    public void schedule(@PathVariable long champId) {
+        System.out.println("Will create schedule of group " + champId);
+    }
 }
