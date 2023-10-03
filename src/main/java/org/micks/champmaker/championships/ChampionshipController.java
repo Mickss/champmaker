@@ -106,5 +106,6 @@ public class ChampionshipController {
     @PostMapping(value = "/{champId}/schedule")
     public void schedule(@PathVariable long champId) {
         System.out.println("Will create schedule of group " + champId);
+        championshipService.schedule(champId);
     }
 }

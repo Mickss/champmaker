@@ -7,7 +7,11 @@ import org.micks.champmaker.register.RegisterTeamDTO;
 import org.micks.champmaker.register.RegisteredTeamEntity;
 import org.micks.champmaker.register.RegisteredTeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +30,9 @@ public class ChampionshipService {
 
     @Autowired
     private RegisteredTeamRepository registeredTeamRepository;
+
+    @Autowired
+    private WebClient webClient;
 
     public ChampionshipDTO getChampionship(long champId) throws EntityNotFoundException {
         Optional<ChampionshipEntity> optionalChampionship = championshipRepository.findById(champId);
@@ -102,5 +109,15 @@ public class ChampionshipService {
         }
         championshipEntity.setStatus(ChampionshipStatus.REGISTRATION);
         championshipRepository.save(championshipEntity);
+    }
+
+    public void schedule(long champId) {
+        ScheduleChampionshipRequest payload = new ScheduleChampionshipRequest(champId);
+        webClient.post()
+                .uri("/schedule", champId)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just(payload), ScheduleChampionshipRequest.class)
+                .retrieve()
+                .bodyToMono(String.class);
     }
 }
