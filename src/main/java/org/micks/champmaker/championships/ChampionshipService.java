@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -112,12 +113,19 @@ public class ChampionshipService {
     }
 
     public void schedule(long champId) {
-        ScheduleChampionshipRequest payload = new ScheduleChampionshipRequest(champId);
+        ArrayList<Object> testList = new ArrayList<>();
+        testList.add("Group A");
+        testList.add("Group B");
+        ScheduleChampionshipRequest payload = new ScheduleChampionshipRequest(champId, testList);
         webClient.post()
                 .uri("/schedule", champId)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(payload), ScheduleChampionshipRequest.class)
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(String.class)
+                .doOnError((error) -> {
+                    throw new IllegalStateException("Failed to send request to matches service", error);
+                })
+                .block();
     }
 }
